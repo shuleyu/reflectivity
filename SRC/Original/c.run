@@ -1,0 +1,28 @@
+#!/bin/csh
+
+set CRFLEXE = Ncrfl
+set MODEL = 'crfl.dat.PREM'
+set NAME = PREM
+
+
+if(-e STATS) then
+   echo " ----------------------------------------- " >> STATS
+else
+   echo " ----------------------------------------- " >! STATS
+endif
+
+echo "          Benchmark tests for CRFL         " >> STATS
+date "+            date: %m/%d/%y  " >> STATS
+echo " ----------------------------------------- " >> STATS
+
+echo " Running model  ${MODEL} "  >> STATS
+date "+        start time: %H:%M:%S" >> STATS
+cp $MODEL crfl.dat
+$CRFLEXE
+mv crfl.out crfl.out.${NAME}
+mv crfl.psv crfl.psv.${NAME}
+mv crfl.sh crfl.sh.${NAME}
+date "+        finish time: %H:%M:%S" >> STATS
+
+\rm crfl.dat
+

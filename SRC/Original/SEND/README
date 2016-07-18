@@ -1,0 +1,101 @@
+--------------------------------------------------------
+  Information on the Fuchs & Muller reflectivity code.
+--------------------------------------------------------
+
+I originally received the code from Harley Benz at the USGS, who 
+(possibly through a few others) got the code from the German group.
+
+The following 4 documents were originally sent to me:
+
+  crfl.f 	= reflectivity program source code (FORTRAN 77)
+		INPUT: "crfl.dat"
+		OUTPUT: "crfl.psv", "crfl.sh", "crfl.out".  All 3
+			in ASCII format.
+  crfl.dat_orig	= an example input model for crfl.f
+  crfl2sac.f    = source code to convert crfl.f output into SAC files
+                  (when you compile this one you have to include path to
+                   your computer system's SAC library)
+  doc		= documentation for input parameters.  This file will
+		   become your bible.
+
+The crfl.dat file I've included is PREM, appropriate for the SKS, S window,
+SV and SH components, but not P.
+
+Also look at:
+    MODEL = and abridged model with some additional information on what
+            the various columns mean (since the 'doc' file doesn't explain 
+            things in too much detail).
+
+Useful rules of thumb  which will be more meaningful after 
+familiarizing yourself with the input file are listed below. (However
+the key here is to experiment to see what affects what).
+
+(1) # of slownesses to calculate should be at least =
+    
+      ( max delta in km ) * ( max freq of interest ) 
+     ______________________________________________
+          (minimum phase velocity integrating)
+
+   
+(2) important: sample interval (dt) must be such that the highest frequency
+    can be resolved, and you can put the highest freq near Nyquist
+
+(3) fix dt and t0 (duration of signal) to be the same, or you'll get
+    a ramp in the src-time function
+
+(4) acausal source signal is fixed by adjusting the "# of zeros in front"
+    parameter in the input file. As the code is, you get the arrival
+    time of phases occurring at *the peaks* of arrivals -> thus some of
+    the signal is acausal.  (not a problem for differential times).
+    I wouldn't recommend this code for absolute arrival time info.
+
+(5) the "full" reflectivity option is usually only necessary for surface waves
+    though you may wish to try a run with and with out this option
+
+(6) the Muller reflectivity tutorial paper is very useful for this code
+    in understanding some of the options of the input (refs:
+
+    Muller, G., The reflectivity method: A tutorial, J. Geophys., 58,
+    153-174, 1985.
+
+    Fuchs, K., and G. Muller, Computation of synthetics seismograms
+    with the reflectivity method and comparison with observations, Geophys.
+    J. Int., 23, 417-433, 1971.
+
+(7) absolute amplitudes are tricky, but differential amps should be okay.
+    I wouldn't recommend this code for absolute amplitude info.
+
+(8) for starters, use large T and Delta windows, and just long periods,
+    until you are sure the correct phases are arriving where they're
+    supposed to, then crank up the freq.
+
+(9) One of the first tasks crfl.f computes is to read all input and do
+    any interpolating or Earth flattening to the Earth model, then write
+    this back out to a file "crfl.out".   When testing runs and trying to
+    troubleshoot runs, information in this file will be extremely useful.
+    When your runs are in steady state: i.e., you're getting what you
+    want, and you're sure everything is working correctly, this file can be
+    more or less be ignored.
+
+This code has many options and 'bells and whistles'. I've not tried them
+all.  The model file, as the code presently exists,  must be named 'crfl.dat',
+then to run the code just type the executable name, e.g., 'crfl &'.
+The output is called crfl.psv for responses of P and/or SV components,
+and crfl.sh for the SH component.
+
+To compile, if you will be using the code a lot, try benchmarking it
+on different machines, with different optimization flags.  On
+an ultra server, for example, I use:
+    f77 -fast -native crfl.f -o crfl    (the "fast" flag I think is same as -O4)
+Though, the key here is to bench mark.  Make differently optimized executables,
+then try them.  Note, some Sun boxes can have f77 compiled according to
+specific architecture (e.g., see info on the "libmil" flags on man pages)
+
+one pain in the butt.... double check in the code regarding if your input parameters
+for source mechanism and azimuths to stations: are they in degrees or radians?
+I don't always remember, but my input files are correct.  These should eventually
+all be changed to degrees.
+
+The input can be for a distance RANGE and a set distance INTERVAL (as in
+the crfl.dat file), or you can give it SPECIFIC source to station distances and 
+azimuths. (see crfl.dat.moreinfo).

@@ -1,0 +1,204 @@
+         517          10          25           2
+ no. of receivers =           40
+ distance to stations =    6672.00000       6783.19482       6894.39014       7005.58398       7116.77881       7227.97412       7339.16895       7450.36377       7561.55908       7672.75293       7783.94824       7895.14307       8006.33789       8117.53320       8228.72754       8339.92285       8451.11816       8562.31348       8673.50879       8784.70410       8895.89941       9007.09473       9118.29004       9229.48535       9340.68066       9451.87598       9563.07129       9674.26660       9785.46191       9896.65723       10007.8525       10119.0479       10230.2432       10341.4385       10452.6338       10563.8291       10675.0244       10786.2197       10897.4150       11008.6104    
+ vred=    100000.000      tmin=    800.000000      dt =   0.250000000    
+ station location =    6672.00000    
+ starting time of trace =    800.066711    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.84100002E-09
+ station location =    6783.19482    
+ starting time of trace =    800.067810    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.76699999E-09
+ station location =    6894.38965    
+ starting time of trace =    800.068970    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.69400005E-09
+ station location =    7005.58447    
+ starting time of trace =    800.070068    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.65299996E-09
+ station location =    7116.77930    
+ starting time of trace =    800.071167    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.60400004E-09
+ station location =    7227.97412    
+ starting time of trace =    800.072266    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.55199997E-09
+ station location =    7339.16895    
+ starting time of trace =    800.073364    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.50000001E-09
+ station location =    7450.36377    
+ starting time of trace =    800.074524    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.45400003E-09
+ station location =    7561.55859    
+ starting time of trace =    800.075623    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.39699996E-09
+ station location =    7672.75342    
+ starting time of trace =    800.076721    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.33500000E-09
+ station location =    7783.94824    
+ starting time of trace =    800.077820    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.30199995E-09
+ station location =    7895.14307    
+ starting time of trace =    800.078979    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.26699995E-09
+ station location =    8006.33789    
+ starting time of trace =    800.080078    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.21099997E-09
+ station location =    8117.53271    
+ starting time of trace =    800.081177    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.16300003E-09
+ station location =    8228.72754    
+ starting time of trace =    800.082275    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.12800003E-09
+ station location =    8339.92285    
+ starting time of trace =    800.083374    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.06800002E-09
+ station location =    8451.11816    
+ starting time of trace =    800.084534    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    1.03800002E-09
+ station location =    8562.31348    
+ starting time of trace =    800.085632    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    9.89500037E-10
+ station location =    8673.50879    
+ starting time of trace =    800.086731    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    9.71700054E-10
+ station location =    8784.70410    
+ starting time of trace =    800.087830    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    9.21699994E-10
+ station location =    8895.89941    
+ starting time of trace =    800.088989    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    8.91400009E-10
+ station location =    9007.09473    
+ starting time of trace =    800.090088    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    8.77500017E-10
+ station location =    9118.29004    
+ starting time of trace =    800.091187    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    8.51899995E-10
+ station location =    9229.48535    
+ starting time of trace =    800.092285    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    8.31100022E-10
+ station location =    9340.68066    
+ starting time of trace =    800.093384    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    7.85400023E-10
+ station location =    9451.87598    
+ starting time of trace =    800.094543    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    7.47300000E-10
+ station location =    9563.07129    
+ starting time of trace =    800.095642    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    6.79500012E-10
+ station location =    9674.26660    
+ starting time of trace =    800.096741    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    6.18699980E-10
+ station location =    9785.46191    
+ starting time of trace =    800.097839    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    5.67099978E-10
+ station location =    9896.65723    
+ starting time of trace =    800.098938    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    5.07699993E-10
+ station location =    10007.8525    
+ starting time of trace =    800.100098    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.57200000E-10
+ station location =    10119.0479    
+ starting time of trace =    800.101196    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.54299987E-10
+ station location =    10230.2432    
+ starting time of trace =    800.102295    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.52500010E-10
+ station location =    10341.4385    
+ starting time of trace =    800.103394    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.49000004E-10
+ station location =    10452.6338    
+ starting time of trace =    800.104553    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.45499998E-10
+ station location =    10563.8291    
+ starting time of trace =    800.105652    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.40600001E-10
+ station location =    10675.0244    
+ starting time of trace =    800.106750    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.37799991E-10
+ station location =    10786.2197    
+ starting time of trace =    800.107849    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.30199987E-10
+ station location =    10897.4150    
+ starting time of trace =    800.108948    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.23400009E-10
+ station location =    11008.6104    
+ starting time of trace =    800.110107    
+ component (hor=1, ver=2):            2
+ npts =         4096
+ max. amplitude =    4.12500006E-10

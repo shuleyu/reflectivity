@@ -1,0 +1,53 @@
+------------------------------------------------------
+info on model file format for they way I use the code
+------------------------------------------------------
+
+=============
+depth
+=============
+this is depth to a set of values.  (Vp, Qp,Vs,Qs,density).  Then,
+you will interpolate between these "nodes" with as many layers as
+you like (code does this for you) w/ n_layer.
+
+=============
+n_layer
+=============
+The last column (integer) number is the layer interpolation number.
+
+n_layer = 0  -> 1st order discontinuity above this layer. For this case,
+		the parameters in the line above much be for the same depth
+        = m  -> interpolate between this set of values and those of the line
+		above with m layers
+
+=============
+example
+=============
+
+    depth      vp      Qp          vs       Qs         rho         n_layer
+    0.0000    5.8000  180.0000    3.2000  150.0000    2.6000         0
+   15.0000    5.8000  180.0000    3.2000  150.0000    2.6000         1
+   15.0000    6.8000  322.0000    3.9000  150.0000    2.9000         0
+   24.4000    6.8000  322.0000    3.9000  150.0000    2.9000         1
+   24.4000    8.1106  322.0000    4.4909  150.0000    3.3808         0
+  220.0000    7.9897  322.0000    4.4188  183.0000    3.3595        20
+  220.0000    8.5590  322.0000    4.6439  183.0000    3.4358         0
+  400.0000    8.9052  322.0000    4.7699  183.0000    3.5433        18
+  400.0000    9.1340  322.0000    4.9326  183.0000    3.7238         0
+  600.0000   10.1578  322.0000    5.5160  183.0000    3.9758        20
+  670.0000   10.2662  702.0000    5.5702  183.0000    3.9921         7
+  670.0000   10.7513  702.0000    5.9451  312.0000    4.3807         0
+  771.0000   11.0656  702.0000    6.2405  312.0000    4.4432        10
+         "
+         "
+         "
+        etc.
+
+Thus, the line in the middle ending w/ n_layer=20 means:
+linearly interpole values at this depth (220 km) and values at depth of above
+line (24.4 km) with 20 constant property layers.
+
+The code will immediately do this task upon running, and spew out the
+interpolated model layers into the "crfl.out" file that it creates.
+
+If the Earth flattening flag is turned on, the flattened model will also
+spewed into crfl.out
