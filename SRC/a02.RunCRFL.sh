@@ -16,11 +16,17 @@ cd ${WORKDIR}
 # ================================================
 
 echo "<EQ> <Thickness> <Vp_Bot> <Vp_Top> <Vs_Bot> <Vs_Top> <Rho_Bot> <Rho_Top>" > ${WORKDIR}/index
-for dir in `ls -d ${WORKDIR}/${ModelName}_*`
+for count in `seq ${RunBegin} ${RunEnd}`
 do
 
-    Model=${dir##*/}
-    count=${Model##*_}
+	dir=`ls -d ${WORKDIR}/${ModelName}_${count}`
+    Model=${ModelName}_${count}
+
+	if ! [ -d ${dir} ]
+	then
+		echo "    ~=> No Calculation file for ${Model} ..."
+		continue
+	fi
 
     cd ${dir}
     trap "rm -f ${dir}/crfl.dat ${dir}/crfl.sh ${dir}/crfl.psv ${dir}/crfl.out; exit 1" SIGINT

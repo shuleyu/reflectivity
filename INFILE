@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.tmp
+<WORKDIR>                            /home/shule/PROJ/t039.ULVZ_1110
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
@@ -15,9 +15,9 @@
 # a01.
 <BeginIndex>                         1
 
-<RemoveCrust>                        0
-<Remove220>                          0
-<Remove400>                          0
+<RemoveCrust>                        1
+<Remove220>                          1
+<Remove400>                          1
 <Remove670>                          0
 									 -- only 1 or 0, no other values.
 
@@ -91,7 +91,7 @@ ScS
 
 
 <Model_BEGIN>
-0 0 1    1.0 1.0 0.05   1   1.0 1.0 0.05    1.0 1.0 0.02     1  1.0 1.0 0.2    1.00 1.00 0.05   1  1.0 1.0 0.05
+5 30 5    1 1 0.05   1   1 1 0.05    0.7 1.0 0.02  1  0.7 0.7 0.2    1.00 1.30 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
@@ -99,10 +99,12 @@ ScS
 <RunReference>                       0
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
+<RunBegin>                           576
+<RunEnd>                             672
 
 # a03.
 <PostBegin>                          0
-<PostEnd>                            101
+<PostEnd>                            0
 <NoiseLevel>                         0.01
 
 
@@ -116,5 +118,5 @@ ScS
 <AnoyInc>                            10
 <GridyInc>                           5
 <TickyInc>                           1
-<PlotBegin>                          0
-<PlotEnd>                            0
+<PlotBegin>                          1
+<PlotEnd>                            672
