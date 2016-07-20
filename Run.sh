@@ -30,14 +30,18 @@ fi
 
 # DIRs.
 WORKDIR=`grep "<WORKDIR>" ${CODEDIR}/INFILE | awk '{print $2}'`
-mkdir -p ${WORKDIR}
-cp ${CODEDIR}/INFILE ${WORKDIR}
-cp ${CODEDIR}/LIST.sh ${WORKDIR}
-chmod -x ${WORKDIR}/LIST.sh
+trap "rm -f ${WORKDIR}/tmpfile*_$$; exit 1" SIGINT
+mkdir -p ${WORKDIR}/LIST
+mkdir -p ${WORKDIR}/INPUT
+cp ${CODEDIR}/INFILE ${WORKDIR}/tmpfile_INFILE_$$
+cp ${CODEDIR}/INFILE ${WORKDIR}/INPUT/INFILE_`date +%m%d_%H%M`
+cp ${CODEDIR}/LIST.sh ${WORKDIR}/tmpfile_LIST_$$
+cp ${CODEDIR}/LIST.sh ${WORKDIR}/LIST/LIST_`date +%m%d_%H%M`
+chmod -x ${WORKDIR}/LIST/*
 cd ${WORKDIR}
 
 # Deal with parameters.
-grep -n "<" ${WORKDIR}/INFILE        \
+grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$ \
 | grep ">"                           \
 | grep -v "BEGIN"                    \
 | grep -v "END"                      \
@@ -47,7 +51,7 @@ grep -n "<" ${WORKDIR}/INFILE        \
 
 source ${WORKDIR}/tmpfile_$$
 
-grep -n "<" ${WORKDIR}/INFILE        \
+grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$ \
 | grep ">"                           \
 | awk 'BEGIN {FS=":"} {print $2,$1}' \
 | awk 'BEGIN {FS="<"} {print $2}'    \
@@ -56,7 +60,7 @@ grep -n "<" ${WORKDIR}/INFILE        \
 | grep "BEGIN"                       \
 | sort -g -k 2,2 > tmpfile1_$$
 
-grep -n "<" ${WORKDIR}/INFILE        \
+grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$ \
 | grep ">"                           \
 | awk 'BEGIN {FS=":"} {print $2,$1}' \
 | awk 'BEGIN {FS="<"} {print $2}'    \
@@ -70,7 +74,7 @@ paste tmpfile1_$$ tmpfile2_$$ | awk '{print $1,$2,$4}' > tmpfile_parameters_$$
 while read Name line1 line2
 do
     Name=${Name%_*}
-    awk -v N1=${line1} -v N2=${line2} '{ if ( $1!="" && N1<NR && NR<N2 ) print $0}' ${WORKDIR}/INFILE > ${WORKDIR}/tmpfile_${Name}_$$
+    awk -v N1=${line1} -v N2=${line2} '{ if ( $1!="" && N1<NR && NR<N2 ) print $0}' ${WORKDIR}/tmpfile_INFILE_$$ > ${WORKDIR}/tmpfile_${Name}_$$
 done < tmpfile_parameters_$$
 
 # Additional DIRs.
@@ -90,7 +94,7 @@ done
 #            ! Compile !
 #============================================
 mkdir -p ${EXECDIR}
-cp ${WORKDIR}/INFILE ${EXECDIR}
+cp ${WORKDIR}/tmpfile_INFILE_$$ ${EXECDIR}
 trap "rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$; exit 1" SIGINT
 
 INCLUDEDIR="-I${SACDIR}/include -I${CCODEDIR}"
@@ -161,7 +165,7 @@ cat >> ${WORKDIR}/stdout << EOF
 Run Date: `date`
 EOF
 
-${CODEDIR}/LIST.sh >> ${WORKDIR}/stdout 2>&1
+${CODEDIR}/tmpfile_LIST_$$ >> ${WORKDIR}/stdout 2>&1
 
 cat >> ${WORKDIR}/stdout << EOF
 
