@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ULVZ_1110
+<WORKDIR>                            /home/shule/PROJ/t039.PREM_1110_Amp
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
@@ -13,7 +13,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         1
+<BeginIndex>                         0
 
 <RemoveCrust>                        1
 <Remove220>                          1
@@ -22,20 +22,20 @@
 									 -- only 1 or 0, no other values.
 
 # Source. ( CMT in deg.)
-<strike>                             0
-<dip>                                90
-<rake>                               0
-<EVDE>                               500
+<strike>                             194
+<dip>                                36
+<rake>                               -48
+<EVDE>                               184.9
 <OMARKER>                            0
 
 # Receivers.
 <REDE>                               0
-<AZMIN>                              0
-<AZMAX>                              0
-<AZINC>                              1
-<DISTMIN>                            40
-<DISTMAX>                            85
-<DISTINC>                            0.1
+<AZMIN>                              317.5
+<AZMAX>                              326.5
+<AZINC>                              0.5
+<DISTMIN>                            59
+<DISTMAX>                            80
+<DISTINC>                            0.5
 <TargetPhases_BEGIN>
 S
 ScS
@@ -91,16 +91,16 @@ ScS
 
 
 <Model_BEGIN>
-5 30 5    1 1 0.05   1   1 1 0.05    0.7 1.0 0.02  1  0.7 0.7 0.2    1.00 1.30 0.05   1  1.0 1.0 0.05
+0 0 5    1 1 0.05   1   1 1 0.05    1.0 1.0 0.02  1  1.0 1.0 0.2    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
 # a02.
-<RunReference>                       0
+<RunReference>                       1
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           576
-<RunEnd>                             672
+<RunBegin>                           0
+<RunEnd>                             0
 
 # a03.
 <PostBegin>                          0

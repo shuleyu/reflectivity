@@ -69,7 +69,7 @@ do
 
     if [ ${RunReference} -eq 1 ]
     then
-        EQname=`echo "201600000000 - ${count}" | bc `
+        EQname=`echo "200608250044 - ${count}" | bc `
     else
         EQname=`echo "201500000000 + ${count}" | bc `
     fi
