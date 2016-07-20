@@ -11,7 +11,7 @@ echo ""
 echo "--> `basename $0` is running."
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
-cp ${CODEDIR}/INFILE .
+cp ${CODEDIR}/tmpfle_INFILE_${RunNumber} .
 trap "rm -r ${EXECDIR}/*.out ${ModelName}_* *index 2>/dev/null; exit 1" SIGINT
 
 # ================================================
