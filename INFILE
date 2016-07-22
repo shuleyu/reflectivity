@@ -13,7 +13,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         0
+<BeginIndex>                         74
 
 <RemoveCrust>                        1
 <Remove220>                          1
@@ -22,19 +22,19 @@
 									 -- only 1 or 0, no other values.
 
 # Source. ( CMT in deg.)
-<strike>                             194
-<dip>                                36
-<rake>                               -48
-<EVDE>                               184.9
+<strike>                             224
+<dip>                                28
+<rake>                               -44
+<EVDE>                               111
 <OMARKER>                            0
 
 # Receivers.
 <REDE>                               0
-<AZMIN>                              317.5
-<AZMAX>                              326.5
+<AZMIN>                              345
+<AZMAX>                              355.5
 <AZINC>                              0.5
-<DISTMIN>                            59
-<DISTMAX>                            80
+<DISTMIN>                            53
+<DISTMAX>                            66
 <DISTINC>                            0.5
 <TargetPhases_BEGIN>
 S
@@ -86,7 +86,7 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ
+<ModelName>                          PREM
 <LayerInc>                           10
 
 
@@ -99,12 +99,12 @@ ScS
 <RunReference>                       1
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           0
-<RunEnd>                             0
+<RunBegin>                           74
+<RunEnd>                             74
 
 # a03.
-<PostBegin>                          0
-<PostEnd>                            0
+<PostBegin>                          74
+<PostEnd>                            74
 <NoiseLevel>                         0.01
 
 

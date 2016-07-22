@@ -69,7 +69,7 @@ do
 
     if [ ${RunReference} -eq 1 ]
     then
-        EQname=`echo "200608250044 - ${count}" | bc `
+        EQname=`echo "201308230834 - ${count}" | bc `
     else
         EQname=`echo "201500000000 + ${count}" | bc `
     fi
@@ -90,6 +90,6 @@ do
 
 done # Done model loop.
 
-cd ${CODEDIR}
+cd ${WORKDIR}
 
 exit 0

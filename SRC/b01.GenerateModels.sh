@@ -135,6 +135,6 @@ done # done Model loop.
 #     pdfunite `ls -rt *_*pdf` All.pdf
 # fi
 
-cd ${CODEDIR}
+cd ${WORKDIR}
 
 exit 0

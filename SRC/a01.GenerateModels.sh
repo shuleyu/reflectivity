@@ -11,7 +11,6 @@ echo ""
 echo "--> `basename $0` is running."
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
-cp ${CODEDIR}/tmpfle_INFILE_${RunNumber} .
 trap "rm -r ${EXECDIR}/*.out ${ModelName}_* *index 2>/dev/null; exit 1" SIGINT
 
 # ================================================
@@ -432,6 +431,6 @@ done # done generating crfl.dat for each models.
 # Clean up.
 rm *index 2>/dev/null
 
-cd ${CODEDIR}
+cd ${WORKDIR}
 
 exit 0

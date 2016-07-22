@@ -29,7 +29,7 @@ c     Altered to these values: SY 09/09/14
 c      maximum number of frequencies:    nfr=131072            see
 c      maximum number of ray-parameters: npa=5000         parameter
 c      maximum number of layers:         nla=1000         statement
-c      maximum number of distancies:     ndis=900          statement
+c      maximum number of distancies:     ndis=900        statement
 c      Radius of the earth: 6370 -> 6371.
 c
 c     Moment tensor read in degrees

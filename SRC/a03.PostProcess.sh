@@ -35,7 +35,7 @@ do
     then
         file_psv=crfl.psv.ref
         file_sh=crfl.sh.ref
-        EQname=`echo "200608250044 - ${count}" | bc `
+        EQname=`echo "201308230834 - ${count}" | bc `
     else
         file_psv=crfl.psv.${Model}
         file_sh=crfl.sh.${Model}

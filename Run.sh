@@ -165,7 +165,7 @@ cat >> ${WORKDIR}/stdout << EOF
 Run Date: `date`
 EOF
 
-${CODEDIR}/tmpfile_LIST_$$ >> ${WORKDIR}/stdout 2>&1
+${WORKDIR}/tmpfile_LIST_$$ >> ${WORKDIR}/stdout 2>&1
 
 cat >> ${WORKDIR}/stdout << EOF
 
