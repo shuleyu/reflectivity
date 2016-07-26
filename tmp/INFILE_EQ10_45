@@ -13,7 +13,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         47
+<BeginIndex>                         45
 
 <RemoveCrust>                        1
 <Remove220>                          1
@@ -30,8 +30,8 @@
 
 # Receivers.
 <REDE>                               0
-<AZMIN>                              346
-<AZMAX>                              360
+<AZMIN>                              317
+<AZMAX>                              331
 <AZINC>                              0.5
 <DISTMIN>                            65
 <DISTMAX>                            80
@@ -99,12 +99,12 @@ ScS
 <RunReference>                       0
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           47
-<RunEnd>                             47
+<RunBegin>                           45
+<RunEnd>                             45
 
 # a03.
-<PostBegin>                          47
-<PostEnd>                            47
+<PostBegin>                          45
+<PostEnd>                            45
 <NoiseLevel>                         0.01
 
 

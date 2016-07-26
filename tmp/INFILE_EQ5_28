@@ -13,7 +13,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         47
+<BeginIndex>                         28
 
 <RemoveCrust>                        1
 <Remove220>                          1
@@ -22,19 +22,19 @@
 									 -- only 1 or 0, no other values.
 
 # Source. ( CMT in deg.)
-<strike>                             180
-<dip>                                11
-<rake>                               -79
-<EVDE>                               214.3
+<strike>                             179
+<dip>                                15
+<rake>                               -80
+<EVDE>                               216.4
 <OMARKER>                            0
 
 # Receivers.
 <REDE>                               0
-<AZMIN>                              346
-<AZMAX>                              360
+<AZMIN>                              357.5
+<AZMAX>                              359.5
 <AZINC>                              0.5
-<DISTMIN>                            65
-<DISTMAX>                            80
+<DISTMIN>                            52.5
+<DISTMAX>                            79
 <DISTINC>                            0.5
 <TargetPhases_BEGIN>
 S
@@ -99,12 +99,12 @@ ScS
 <RunReference>                       0
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           47
-<RunEnd>                             47
+<RunBegin>                           28
+<RunEnd>                             28
 
 # a03.
-<PostBegin>                          47
-<PostEnd>                            47
+<PostBegin>                          28
+<PostEnd>                            28
 <NoiseLevel>                         0.01
 
 
