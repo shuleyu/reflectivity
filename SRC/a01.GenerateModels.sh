@@ -320,8 +320,15 @@ while read PHASE
 do
     PHASELIST="${PHASELIST},${PHASE}"
 done < ${WORKDIR}/tmpfile_TargetPhases_${RunNumber}
-taup_time -h 100 -deg ${DISTMIN} -ph ${PHASELIST} --mod prem
-taup_time -h 100 -deg ${DISTMAX} -ph ${PHASELIST} --mod prem
+
+if ! [ -z "${CertainStaionListFile}" ]
+then
+	DISTMIN=`minmax -C ${CertainStaionListFile} | awk '{print $1}'`
+	DISTMAX=`minmax -C ${CertainStaionListFile} | awk '{print $2}'`
+fi
+
+taup_time -h ${EVDE} -deg ${DISTMIN} -ph ${PHASELIST} --mod prem
+taup_time -h ${EVDE} -deg ${DISTMAX} -ph ${PHASELIST} --mod prem
 
 # ========= Generate crfl.dat on each model. =========
 
@@ -336,7 +343,10 @@ do
 #     mv ${WORKDIR}/${ModelName}_${count}.model ${WORKDIR}/${ModelName}_${count}/ModelInput
 
     # Generate modified reference model.
-    ${EXECDIR}/GenModel.out 9 7 29 << EOF
+	if [ -z "${CertainStaionListFile}" ]
+	then # If we use DISTMIN,DISTMAX,AZMIN,AZMAX
+
+		${EXECDIR}/GenModel.out 9 7 29 << EOF
 ${RaypN}
 ${NPTS}
 ${M1}
@@ -383,11 +393,70 @@ ${VRED}
 ${LayerInc}
 ${ReflDepth}
 EOF
-    if [ $? -ne 0 ]
-    then
-        echo "!=> C code Abort on ${ModelName}_${count}!"
-        continue
-    fi
+		if [ $? -ne 0 ]
+		then
+			echo "!=> C code Abort on ${ModelName}_${count}!"
+			continue
+		fi
+	else
+
+		${EXECDIR}/GenModel_CertainStations.out 9 6 29 << EOF
+${RaypN}
+${NPTS}
+${M1}
+${M2}
+${Layer}
+${RemoveCrust}
+${Remove220}
+${Remove400}
+${Remove670}
+ModelInput
+ReferenceModel
+ModelOutput
+tmpfile_suffix
+${CertainStaionListFile}
+tmpfile_reflzone
+${strike}
+${dip}
+${rake}
+${EVDE}
+${AZMIN}
+${AZMAX}
+${AZINC}
+${DISTMIN}
+${DISTMAX}
+${DISTINC}
+${REDE}
+${Begin}
+${V1}
+${V2}
+${V3}
+${V4}
+${F1}
+${F2}
+${F3}
+${F4}
+${ATTEN}
+${DELTA}
+${M3}
+${M4}
+${LENGTH}
+${OMARKER}
+${VRED}
+${LayerInc}
+${ReflDepth}
+EOF
+
+		if [ $? -ne 0 ]
+		then
+			echo "!=> C code Abort on ${ModelName}_${count}!"
+			continue
+		fi
+
+		awk '{print $1}' ${CertainStaionListFile} > tmpfile1_$$
+		awk '{print $2}' ${CertainStaionListFile} > tmpfile2_$$
+
+	fi
 
     # Make crfl.dat.
     REFLINDEX=`cat tmpfile_reflzone`

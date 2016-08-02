@@ -59,7 +59,7 @@ int main(int argc, char **argv){
 
     fpin=fopen(PS[infile],"r");
     for (count=0;count<PI[NPTS];count++){
-        fscanf(fpin,"%lf%lf%*lf%lf%*lf%lf%d",&depth[count],&vp[count],&vs[count],&rho[count],&LayerN[count]);
+        fscanf(fpin,"%lf%lf%*f%lf%*f%lf%d",&depth[count],&vp[count],&vs[count],&rho[count],&LayerN[count]);
     } 
     fclose(fpin);
 

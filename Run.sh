@@ -94,7 +94,6 @@ done
 #            ! Compile !
 #============================================
 mkdir -p ${EXECDIR}
-cp ${WORKDIR}/tmpfile_INFILE_$$ ${EXECDIR}
 trap "rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$; exit 1" SIGINT
 
 INCLUDEDIR="-I${SACDIR}/include -I${CCODEDIR}"

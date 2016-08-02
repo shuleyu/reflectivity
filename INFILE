@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ULVZ1_1110_Amp
+<WORKDIR>                            /home/shule/PROJ/t039.ULVZ0_1110_Amp
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
@@ -13,7 +13,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         47
+<BeginIndex>                         18
 
 <RemoveCrust>                        1
 <Remove220>                          1
@@ -22,24 +22,27 @@
 									 -- only 1 or 0, no other values.
 
 # Source. ( CMT in deg.)
-<strike>                             180
-<dip>                                11
-<rake>                               -79
-<EVDE>                               214.3
+<strike>                             224
+<dip>                                28
+<rake>                               -44
+<EVDE>                               111
 <OMARKER>                            0
 
 # Receivers.
 <REDE>                               0
-<AZMIN>                              346
-<AZMAX>                              360
-<AZINC>                              0.5
-<DISTMIN>                            65
-<DISTMAX>                            80
-<DISTINC>                            0.5
+<AZMIN>                              0
+<AZMAX>                              0
+<AZINC>                              5
+<DISTMIN>                            40
+<DISTMAX>                            85
+<DISTINC>                            0.1
 <TargetPhases_BEGIN>
 S
 ScS
 <TargetPhases_END>
+<CertainStaionListFile>              /home/shule/Research/t039.Synthesis_1D_Reflectivity.140527/tmpfile_GcarcAZ_201308230834
+									 -- Keep it empty: use the AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC above.
+									 -- If it's not empty, use this give file, which has two columns: Gcarc & Az.
 
 # Seismograms.
 <Begin>                              400
@@ -86,12 +89,12 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ
+<ModelName>                          ULVZ0
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-15 15 5    1 1 0.05   1   1 1 0.05    0.85 0.85 0.02  1  0.85 0.85 0.2    1.00 1.00 0.05   1  1.0 1.0 0.05
+0 0 5    1 1 0.05   1   1 1 0.05    1 1 0.02  1  1 1 0.2    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
@@ -99,12 +102,12 @@ ScS
 <RunReference>                       0
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           47
-<RunEnd>                             47
+<RunBegin>                           18
+<RunEnd>                             18
 
 # a03.
-<PostBegin>                          47
-<PostEnd>                            47
+<PostBegin>                          18
+<PostEnd>                            18
 <NoiseLevel>                         0.01
 
 
