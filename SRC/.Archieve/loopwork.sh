@@ -1,4 +1,5 @@
 #!/bin/bash
+# If we have a general idea
 
 count=0
 while read EQ strike dip rake evde
@@ -8,7 +9,7 @@ do
 	count=$((count+1))
 
 	mysql -N -u shule ScS > tmpfile_GcarcAZ_${EQ} << EOF
-select Gcarc,Az from Master_a20 where eq=${EQ} and wantit=1;
+select Gcarc,Az from Master_a13 where eq=${EQ} and wantit=1;
 EOF
 	CertainStaionListFile=`pwd`/tmpfile_GcarcAZ_${EQ}
 

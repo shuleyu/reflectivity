@@ -11,7 +11,7 @@ echo ""
 echo "--> `basename $0` is running."
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
-trap "rm -r ${EXECDIR}/*.out ${ModelName}_* *index 2>/dev/null; exit 1" SIGINT
+trap "rm -rf ${EXECDIR}/*.out ${ModelName}_* *index; exit 1" SIGINT
 
 # ================================================
 #             ! Work Begin !
@@ -295,7 +295,7 @@ ModelNum=1
 while [ ${ModelNum} -le ${TotalModelNum} ]
 do
     # output indexes.
-    rm ${ModelName}_${ModelNum}.model 2>/dev/null
+    rm -f ${ModelName}_${ModelNum}.model
     for count in `seq 1 ${Layer}`
     do
         cat ${count}.${A[${count}]}.index >> ${ModelName}_${ModelNum}.model
@@ -491,14 +491,14 @@ EOF
 
     # Clean up.
     paste tmpfile1_$$ tmpfile2_$$ > StationGcarcAZ
-    rm tmpfile* 2>/dev/null
+    rm -f tmpfile*
 
     cd ${WORKDIR}
 
 done # done generating crfl.dat for each models.
 
 # Clean up.
-rm *index 2>/dev/null
+rm -f *index
 
 cd ${WORKDIR}
 

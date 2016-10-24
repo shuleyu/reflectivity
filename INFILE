@@ -1,10 +1,11 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ULVZ0_1110_Amp
+<WORKDIR>                            /home/shule/PROJ/t039.ULVZ
+<ReCompile>                          1
+
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
-
 <SACDIR>                             /opt/sac
 <FCOMP>                              f77
 <FFLAG>                              -W
@@ -13,7 +14,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         18
+<BeginIndex>                         301
 
 <RemoveCrust>                        1
 <Remove220>                          1
@@ -22,10 +23,10 @@
 									 -- only 1 or 0, no other values.
 
 # Source. ( CMT in deg.)
-<strike>                             224
-<dip>                                28
-<rake>                               -44
-<EVDE>                               111
+<strike>                             0
+<dip>                                90
+<rake>                               0
+<EVDE>                               500
 <OMARKER>                            0
 
 # Receivers.
@@ -40,7 +41,7 @@
 S
 ScS
 <TargetPhases_END>
-<CertainStaionListFile>              /home/shule/Research/t039.Synthesis_1D_Reflectivity.140527/tmpfile_GcarcAZ_201308230834
+<CertainStaionListFile>
 									 -- Keep it empty: use the AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC above.
 									 -- If it's not empty, use this give file, which has two columns: Gcarc & Az.
 
@@ -89,12 +90,12 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ0
+<ModelName>                          ULVZ
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-0 0 5    1 1 0.05   1   1 1 0.05    1 1 0.02  1  1 1 0.2    1.00 1.00 0.05   1  1.0 1.0 0.05
+25 50 5    1 1 0.05   1   1 1 0.05    1.01 1.10 0.01  -1  1.10 1.10 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
@@ -102,17 +103,27 @@ ScS
 <RunReference>                       0
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           18
-<RunEnd>                             18
+<RunBegin>                           331
+<RunEnd>                             360
 
 # a03.
-<PostBegin>                          18
-<PostEnd>                            18
-<NoiseLevel>                         0.01
+<PostBegin>                          301
+<PostEnd>                            360
+<NoisyPost_BEGIN>
+16
+10
+41
+72
+103
+134
+<NoisyPost_END>
+<NoiseLevel>                         0
 
 
 
 # b01.
+<PlotBegin>                          301
+<PlotEnd>                            360
 <DepthMin>                           2841
 <DepthMax>                           2891
 <AnoDepthInc>                        50
@@ -121,5 +132,3 @@ ScS
 <AnoyInc>                            10
 <GridyInc>                           5
 <TickyInc>                           1
-<PlotBegin>                          1
-<PlotEnd>                            672

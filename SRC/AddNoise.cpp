@@ -6,6 +6,7 @@
 #include<vector>
 #include<string>
 #include<cstring>
+#include<cmath>
 extern "C"{
 #include<sac.h>
 #include<sacio.h>
@@ -17,7 +18,7 @@ using namespace std;
 int main(int argc, char **argv){
 
     enum PIenum{FLAG1};
-    enum PSenum{FileList,NoiseFile,FLAG2};
+    enum PSenum{FileList,NoiseFiles,FLAG2};
     enum Penum{NoiseLevel,FLAG3};
 
     /****************************************************************
@@ -96,43 +97,105 @@ int main(int argc, char **argv){
 
     ****************************************************************/
 
+
+	// Read in noise file names.
+	vector<string> NoiseFileNames;
+	ifstream fpin;
+	fpin.open(PS[NoiseFiles]);
+	while (fpin >> tmpstr){
+		NoiseFileNames.push_back(tmpstr);
+	}
+	fpin.close();
+
+
+	// Chose a random noise for each trace.
 	int nptsx=filenr(PS[FileList].c_str());
+	int *WhichNoise=(int *)malloc(nptsx*sizeof(int));
+	random_int(0,NoiseFileNames.size()-1,WhichNoise,nptsx);
 
-	// Read in noise.
 
-	int maxl=2000000,rawnpts,rawnpts_noise,nerr;
+	// Read in noises.
+	int maxl=2000000,rawnpts,nerr,Length=0;
 	float rawbeg,rawdel;
-
-	float *noise=(float *)malloc(maxl*sizeof(float));
-	int *random_begin=(int *)malloc(nptsx*sizeof(int));
+	float *amp=(float *)malloc(maxl*sizeof(float));
 	char tmpfilename[200];
 
-	strcpy(tmpfilename,PS[NoiseFile].c_str());
-	rsac1(tmpfilename,noise,&rawnpts_noise,&rawbeg,&rawdel,&maxl,&nerr,PS[NoiseFile].size());
-	retrend(0.0,noise,rawnpts_noise,rawbeg);
-	normalize(noise,rawnpts_noise);
-	random_int(0,rawnpts_noise-1,random_begin,nptsx);
+	vector<float *> Noises;
+	vector<int> SignalLength;
+	for (size_t index1=0;index1<NoiseFileNames.size();index1++){
 
-	// Read in file and add noise and output.
+		// Read in noise SAC.
+		strcpy(tmpfilename,NoiseFileNames[index1].c_str());
+		rsac1(tmpfilename,amp,&rawnpts,&rawbeg,&rawdel,&maxl,&nerr,
+			  NoiseFileNames[index1].size());
+		retrend(0.0,amp,rawnpts,rawbeg);
+		normalize(amp,rawnpts);
+
+
+		// Taper this noise so that it's reasonable to period adding the noise.
+		taper(amp,rawnpts,10.0/rawnpts);
+
+
+		// Push it into the noise set.
+		float *NewNoise=(float *)malloc(rawnpts*sizeof(float));
+		for(int index2=0;index2<rawnpts;index2++){
+			NewNoise[index2]=amp[index2];
+		}
+
+		Noises.push_back(NewNoise);
+		SignalLength.push_back(rawnpts);
+		if (Length<rawnpts){
+			Length=rawnpts;
+		}
+	}
+
+	// For each signal, assign a random start ponit.
+	int *Random_Begin=new int [nptsx];
+	random_int(0,Length-1,Random_Begin,nptsx);
+	for (int index1=0;index1<nptsx;index1++){
+		Random_Begin[index1]%=SignalLength[WhichNoise[index1]];
+	}
+
+
+	// Main stuff.
 	ifstream filelist;
 	string infilename;
-
-	float *amp=(float *)malloc(maxl*sizeof(float));
-	double S_amp;
+	double S_amp,AmpScale=1;
+	int Position,Polarity;
 
 	filelist.open(PS[FileList]);
 
 	for (int index1=0;index1<nptsx;index1++){
 
+		int Chosen=WhichNoise[index1];
+		Length=SignalLength[Chosen];
+
+
+		// Read in signal, S amplitude.
 		filelist >> infilename >> S_amp;
 		strcpy(tmpfilename,infilename.c_str());
 
-		rsac1(tmpfilename,amp,&rawnpts,&rawbeg,&rawdel,&maxl,&nerr,infilename.size());
+		rsac1(tmpfilename,amp,&rawnpts,&rawbeg,&rawdel,&maxl,&nerr,
+		      infilename.size());
 
+
+		// Need to rescale the peak to its original amplitude.
+		// Note the maximum amplitude may shift time, because we added noise.
+		Polarity=max_amp(amp,rawnpts,&Position);
+		double y=Noises[Chosen][(Random_Begin[index1]+Position)%Length];
+		AmpScale=1.0/(1-Polarity*y*P[NoiseLevel]);
+		S_amp=Polarity*amp[Position];
+
+
+		// Add noise.
 		for (int index2=0;index2<rawnpts;index2++){
-			amp[index2]+=noise[(random_begin[index1]+index2)%rawnpts_noise]*P[NoiseLevel]*S_amp;
+			amp[index2]+=Noises[Chosen][(Random_Begin[index1]+index2)%Length]
+			             *P[NoiseLevel]*S_amp*AmpScale;
+			amp[index2]/=AmpScale;
 		}
 
+
+		// Output modified signal.
 		wsac1(tmpfilename,amp,&rawnpts,&rawbeg,&rawdel,&nerr,infilename.size());
 
 	}

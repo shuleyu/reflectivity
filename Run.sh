@@ -93,21 +93,24 @@ done
 #============================================
 #            ! Compile !
 #============================================
-mkdir -p ${EXECDIR}
-trap "rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$; exit 1" SIGINT
+if [ ${ReCompile} -eq 1 ]
+then
 
-INCLUDEDIR="-I${SACDIR}/include -I${CCODEDIR}"
-LIBRARYDIR="-L. -L${SACDIR}/lib -L${CCODEDIR}"
-LIBRARIES="-lASU_tools -lsac -lsacio -lm"
+	mkdir -p ${EXECDIR}
+	trap "rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$; exit 1" SIGINT
 
-# ASU_tools Functions.
-cd ${CCODEDIR}
-make
-cd ${EXECDIR}
+	INCLUDEDIR="-I${SACDIR}/include -I${CCODEDIR}"
+	LIBRARYDIR="-L. -L${SACDIR}/lib -L${CCODEDIR}"
+	LIBRARIES="-lASU_tools -lsac -lsacio -lm"
 
-# Executables.
-for code in `ls ${SRCDIR}/*.c | grep -v fun.c`
-do
+	# ASU_tools Functions.
+	cd ${CCODEDIR}
+	make
+	cd ${EXECDIR}
+
+	# Executables.
+	for code in `ls ${SRCDIR}/*.c | grep -v fun.c`
+	do
     name=`basename ${code}`
     name=${name%.c}
 
@@ -119,40 +122,42 @@ do
         rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
         exit 1
     fi
-done
+	done
 
-for code in `ls ${SRCDIR}/*.cpp | grep -v fun.cpp`
-do
-    name=`basename ${code}`
-    name=${name%.cpp}
+	for code in `ls ${SRCDIR}/*.cpp | grep -v fun.cpp`
+	do
+		name=`basename ${code}`
+		name=${name%.cpp}
 
-    ${CPPCOMP} ${CPPFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
+		${CPPCOMP} ${CPPFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
 
-    if [ $? -ne 0 ]
-    then
-        echo "${name} C++ code is not compiled ..."
-        rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
-        exit 1
-    fi
-done
+		if [ $? -ne 0 ]
+		then
+			echo "${name} C++ code is not compiled ..."
+			rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
+			exit 1
+		fi
+	done
 
-for code in `ls ${SRCDIR}/*.f`
-do
-    name=`basename ${code}`
-    name=${name%.f}
+	for code in `ls ${SRCDIR}/*.f`
+	do
+		name=`basename ${code}`
+		name=${name%.f}
 
-    ${FCOMP} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
+		${FCOMP} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
 
-    if [ $? -ne 0 ]
-    then
-        echo "${name} F code is not compiled ..."
-        rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
-        exit 1
-    fi
-done
+		if [ $? -ne 0 ]
+		then
+			echo "${name} F code is not compiled ..."
+			rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
+			exit 1
+		fi
+	done
 
-# Clean up.
-rm -f ${EXECDIR}/*fun.o
+	# Clean up.
+	rm -f ${EXECDIR}/*fun.o
+
+fi
 
 # ==============================================
 #           ! Work Begin !

@@ -15,7 +15,7 @@ cd ${WORKDIR}
 #             ! Work Begin !
 # ================================================
 
-for count in `seq ${PostBegin} ${PostEnd}`
+while read count
 do
 
 	Model=${ModelName}_${count}
@@ -26,7 +26,7 @@ do
 		echo "    ~=> No crfl calculation result found for ${Model}.."
 		continue
 	else
-		echo "    ==> Running PostProcess on ${Model}.."
+		echo "    ==> Running post-process on ${Model}.."
 	fi
 
 
@@ -42,11 +42,12 @@ do
         EQname=`echo "201500000000 + ${count}" | bc `
     fi
 
-	rm -rf ${WORKDIR}/${EQname}
-	mkdir -p ${WORKDIR}/${EQname}
-    trap "rm -rf ${WORKDIR}/${EQname}; exit 1" SIGINT
+	rm -rf ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname}
+	mkdir -p ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname}
+    trap "rm -rf ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname} ${dir}/*sac ${dir}/tmpfile*$$; exit 1" SIGINT
 
     cd ${dir}
+	find . -iname "*sac" -exec rm '{}' \;
 
     # Run crfl2sac on R and Z component. Make SAC files.
 #     ${EXECDIR}/crfl2sac.out > /dev/null << EOF
@@ -80,7 +81,7 @@ EOF
     if [ $? -ne 0 ]
     then
         echo "!=> crfl2sac sh Abort on ${Model} !"
-		rm -rf ${WORKDIR}/${EQname}
+		rm -rf ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname}
 		continue
     fi
 
@@ -94,12 +95,14 @@ EOF
     done
 
 	# Assume the max amplitude of the synthesis is the amplitude of S wave.
-	saclst depmax depmin f `cat tmpfile_filelist_$$` | awk '{if ($2>-$3) print $1,$2; else print $1,-$3}'> tmpfile_$$
+	saclst depmax KSTNM depmin f `cat tmpfile_filelist_$$` | awk '{if ($2>-$4) print $1,$2; else print $1,-$4}'> tmpfile_$$
+
+	echo "${SRCDIR}/noise.sac" > tmpfile_noisefilenames_$$
 
 	# Add Noise.
 	${EXECDIR}/AddNoise.out 0 2 1 << EOF
 tmpfile_$$
-${SRCDIR}/noise.sac
+tmpfile_noisefilenames_$$
 ${NoiseLevel}
 EOF
     if [ $? -ne 0 ]
@@ -114,6 +117,7 @@ EOF
         Model=PREM
     fi
 
+	rm -f sac.macro
     for file in `ls *.sac`
     do
         COMP=${file%%.sac}
@@ -173,13 +177,13 @@ EOF
     fi
 
     # Move SAC files to OUTPUT dir.
-    mv ${EQname}*.sac ${WORKDIR}/${EQname}
-    cp ModelInput ${WORKDIR}/${EQname}/Index_${count}
+    mv ${EQname}*.sac ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname}
+    cp ModelInput ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname}/Index_${count}
 
 
     # Creat false components.
 	rm -f sac.macro
-    for file in `find ${WORKDIR}/${EQname} -iname "*T.sac"`
+    for file in `find ${WORKDIR}/NoiseLevel_${NoiseLevel}/${EQname} -iname "*T.sac"`
     do
 		cat >> sac.macro << EOF
 cut b 0 1
@@ -201,7 +205,9 @@ EOF
     # Clean up.
     rm -f sac.macro sac.output tmpfile*$$
 
-done # Done model loop.
+done < ${WORKDIR}/tmpfile_NoisyPost_${RunNumber} # Done model loop.
+
+cp ${WORKDIR}/index ${WORKDIR}/NoiseLevel_${NoiseLevel}/
 
 cd ${WORKDIR}
 

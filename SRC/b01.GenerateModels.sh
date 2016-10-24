@@ -127,13 +127,13 @@ EOF
 
 done # done Model loop.
 
-# cd ${PLOTDIR}
-# if [ `ls -rt *_*pdf | wc -l` -eq 1 ]
-# then
-#     cp `ls -rt *_*pdf` All.pdf
-# else
-#     pdfunite `ls -rt *_*pdf` All.pdf
-# fi
+cd ${PLOTDIR}
+if [ `ls -rt *_*pdf | wc -l` -eq 1 ]
+then
+    cp `ls -rt *_*pdf` All.pdf
+else
+    pdfunite `ls -rt *_*pdf` All.pdf
+fi
 
 cd ${WORKDIR}
 

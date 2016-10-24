@@ -26,71 +26,71 @@ do
 		echo "    ~=> No crfl calculation result found for ${Model}.."
 		continue
 	else
-		echo "    ==> Running PostProcess on ${Model}.."
+		echo "    ==> Running post-process on ${Model}.."
 	fi
 
 
-case "${count}" in
-
-	1 )
-		EQ1=200608250044
-		;;
-	2 )
-		EQ1=200705251747
-		;;
-	3 )
-		EQ1=200707211327
-		;;
-	4 )
-		EQ1=200707211534
-		;;
-	5 )
-		EQ1=200711180540
-		;;
-    6 )
-		EQ1=200807080913
-		;;
-	7 )
-		EQ1=200809031125
-		;;
-	8 )
-		EQ1=200810122055
-		;;
-	9 )
-		EQ1=200907120612
-		;;
-	10 )
-		EQ1=200911141944
-		;;
-	11 )
-		EQ1=201003042239
-		;;
-	12 )
-		EQ1=201101010956
-		;;
-	13 )
-		EQ1=201103061231
-		;;
-	14 )
-		EQ1=201106201636
-		;;
-	15 )
-		EQ1=201111221848
-		;;
-	16 )
-		EQ1=201205141000
-		;;
-	17 )
-		EQ1=201205280507
-		;;
-	18 )
-		EQ1=201308230834
-		;;
-	* )
-		echo "EQ1 Error ..."
-		exit 1
-		;;
-esac
+# case "${count}" in
+# 
+# 	1 )
+# 		EQ1=200608250044
+# 		;;
+# 	2 )
+# 		EQ1=200705251747
+# 		;;
+# 	3 )
+# 		EQ1=200707211327
+# 		;;
+# 	4 )
+# 		EQ1=200707211534
+# 		;;
+# 	5 )
+# 		EQ1=200711180540
+# 		;;
+#     6 )
+# 		EQ1=200807080913
+# 		;;
+# 	7 )
+# 		EQ1=200809031125
+# 		;;
+# 	8 )
+# 		EQ1=200810122055
+# 		;;
+# 	9 )
+# 		EQ1=200907120612
+# 		;;
+# 	10 )
+# 		EQ1=200911141944
+# 		;;
+# 	11 )
+# 		EQ1=201003042239
+# 		;;
+# 	12 )
+# 		EQ1=201101010956
+# 		;;
+# 	13 )
+# 		EQ1=201103061231
+# 		;;
+# 	14 )
+# 		EQ1=201106201636
+# 		;;
+# 	15 )
+# 		EQ1=201111221848
+# 		;;
+# 	16 )
+# 		EQ1=201205141000
+# 		;;
+# 	17 )
+# 		EQ1=201205280507
+# 		;;
+# 	18 )
+# 		EQ1=201308230834
+# 		;;
+# 	* )
+# 		echo "EQ1 Error ..."
+# 		exit 1
+# 		;;
+# esac
 
 
 
@@ -104,15 +104,16 @@ esac
     else
         file_psv=crfl.psv.${Model}
         file_sh=crfl.sh.${Model}
-#         EQname=`echo "201500000000 + ${count}" | bc `
-        EQname="${EQ1}"
+        EQname=`echo "201500000000 + ${count}" | bc `
+#         EQname="${EQ1}"
     fi
 
 	rm -rf ${WORKDIR}/${EQname}
 	mkdir -p ${WORKDIR}/${EQname}
-    trap "rm -rf ${WORKDIR}/${EQname}; exit 1" SIGINT
+    trap "rm -rf ${WORKDIR}/${EQname} ${dir}/*sac ${dir}/tmpfile*$$; exit 1" SIGINT
 
     cd ${dir}
+	find . -iname "*sac" -exec rm '{}' \;
 
     # Run crfl2sac on R and Z component. Make SAC files.
 #     ${EXECDIR}/crfl2sac.out > /dev/null << EOF
@@ -163,6 +164,7 @@ EOF
         Model=PREM
     fi
 
+	rm -f sac.macro
     for file in `ls *.sac`
     do
         COMP=${file%%.sac}
