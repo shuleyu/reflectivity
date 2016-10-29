@@ -97,10 +97,11 @@ EOF
 	# Assume the max amplitude of the synthesis is the amplitude of S wave.
 	saclst depmax KSTNM depmin f `cat tmpfile_filelist_$$` | awk '{if ($2>-$4) print $1,$2; else print $1,-$4}'> tmpfile_$$
 
-	echo "${SRCDIR}/noise.sac" > tmpfile_noisefilenames_$$
+	ls ${SRCDIR}/Noises/*sac > tmpfile_noisefilenames_$$
 
 	# Add Noise.
-	${EXECDIR}/AddNoise.out 0 2 1 << EOF
+	${EXECDIR}/AddNoise.out 1 2 1 << EOF
+${RandomNoiseLevel}
 tmpfile_$$
 tmpfile_noisefilenames_$$
 ${NoiseLevel}

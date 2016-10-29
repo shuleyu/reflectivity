@@ -7,6 +7,9 @@
 #include<string>
 #include<cstring>
 #include<cmath>
+#include<random>
+#include<ctime>
+#include<unistd.h>
 extern "C"{
 #include<sac.h>
 #include<sacio.h>
@@ -17,7 +20,7 @@ using namespace std;
 
 int main(int argc, char **argv){
 
-    enum PIenum{FLAG1};
+    enum PIenum{RandomNoiseLevel,FLAG1};
     enum PSenum{FileList,NoiseFiles,FLAG2};
     enum Penum{NoiseLevel,FLAG3};
 
@@ -111,7 +114,13 @@ int main(int argc, char **argv){
 	// Chose a random noise for each trace.
 	int nptsx=filenr(PS[FileList].c_str());
 	int *WhichNoise=(int *)malloc(nptsx*sizeof(int));
-	random_int(0,NoiseFileNames.size()-1,WhichNoise,nptsx);
+
+	std::default_random_engine generator;
+	generator.seed(time(NULL));sleep(1);
+	std::uniform_int_distribution<int> distribution1(0,NoiseFileNames.size()-1);
+	for (size_t index1=0;index1<nptsx;index1++){
+		WhichNoise[index1]=distribution1(generator);
+	}
 
 
 	// Read in noises.
@@ -150,10 +159,30 @@ int main(int argc, char **argv){
 	}
 
 	// For each signal, assign a random start ponit.
+
 	int *Random_Begin=new int [nptsx];
-	random_int(0,Length-1,Random_Begin,nptsx);
+
+
+	generator.seed(time(NULL));sleep(1);
+	std::uniform_int_distribution<int> distribution2(0,Length-1);
 	for (int index1=0;index1<nptsx;index1++){
+		Random_Begin[index1]=distribution2(generator);
 		Random_Begin[index1]%=SignalLength[WhichNoise[index1]];
+	}
+
+
+	// For each signal, assign a random/fixed noise level.
+	double *NL=new double [nptsx];
+	if (PI[RandomNoiseLevel]==1){
+		random_num(NL,nptsx);
+		for (int index1=0;index1<nptsx;index1++){
+			NL[index1]*=P[NoiseLevel];
+		}
+	}
+	else{
+		for (int index1=0;index1<nptsx;index1++){
+			NL[index1]=P[NoiseLevel];
+		}
 	}
 
 
@@ -183,14 +212,14 @@ int main(int argc, char **argv){
 		// Note the maximum amplitude may shift time, because we added noise.
 		Polarity=max_amp(amp,rawnpts,&Position);
 		double y=Noises[Chosen][(Random_Begin[index1]+Position)%Length];
-		AmpScale=1.0/(1-Polarity*y*P[NoiseLevel]);
+		AmpScale=1.0/(1-Polarity*y*NL[index1]);
 		S_amp=Polarity*amp[Position];
 
 
 		// Add noise.
 		for (int index2=0;index2<rawnpts;index2++){
 			amp[index2]+=Noises[Chosen][(Random_Begin[index1]+index2)%Length]
-			             *P[NoiseLevel]*S_amp*AmpScale;
+			             *NL[index1]*S_amp*AmpScale;
 			amp[index2]/=AmpScale;
 		}
 

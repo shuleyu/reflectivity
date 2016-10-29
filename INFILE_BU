@@ -1,4 +1,3 @@
-<NoiseLevel>  0.3
 
 # ================ DIRs and Files ================
 <WORKDIR>                            /home/shule/PROJ/t039.ULVZ
@@ -118,7 +117,8 @@ ScS
 103
 134
 <NoisyPost_END>
-<RandomNoiseLevel>                   1
+<NoiseLevel>                         0.05
+<RandomNoiseLevel>                   0
 									 0  --  Noise level is fixed to NoiseLevel for all distances.
                                      1  --  NoiseLevel is a maximum noise level: different
 									        distances gets a different noise level, which is randomly
