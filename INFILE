@@ -1,10 +1,6 @@
 
 # ================ DIRs and Files ================
-<<<<<<< HEAD
 <WORKDIR>                            /home/shule/PROJ/t039.UHVZ
-=======
-<WORKDIR>                            /home/shule/PROJ/t035.test
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -55,19 +51,9 @@ PcP
 
 # Seismograms.
 <Begin>                              400
-<<<<<<< HEAD
-
-<DELTA>                              0.05
-<NPTS>                               32768
-									 -- NPTS must be 2^N.
-									 -- DELTA*NPTS is the first factor of calculation time.
-
-
-=======
 <DELTA>                              0.05
 <LENGTH>                             1000
 <NPTS>                               20000
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 <VRED>                               0
 
 # Calculation Details.
@@ -76,7 +62,6 @@ PcP
 <V2>                                 8.0
 <V3>                                 35
 <V4>                                 40
-<<<<<<< HEAD
 <RaypN>                              2000
 									 -- RaypN is the second factor of calculation time.
 
@@ -85,14 +70,6 @@ PcP
 <F3>                                 1.0
 <F4>                                 1.1
                                      -- (f2-f1) is the third factor of calculation time.
-=======
-<RaypN>                              3000
-
-<F1>                                 0.25
-<F2>                                 0.5
-<F3>                                 2
-<F4>                                 4
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 
 [ RaypN should be greater than
 
@@ -119,27 +96,18 @@ PcP
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<<<<<<< HEAD
 <ModelName>                          UHVZ
-=======
-<ModelName>                          P
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-<<<<<<< HEAD
 5 20 5    1 1 0.05   1   1 1 0.05    1.05 1.1 0.05  -1  1.1 1.1 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
-=======
-25 25 5    0.9 1.0 0.1   -1   1.0 1.0 0.05    0.8 1.0 0.1  -1  1.0 1.0 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 <Model_END>
 
 
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<<<<<<< HEAD
 <RunBegin>                           7
 <RunEnd>                             8
 
@@ -148,15 +116,6 @@ PcP
 <PostEnd>                            8
 
 # a03_2.
-=======
-                                     0  --  Run Modified Model.
-<RunBegin>                           2
-<RunEnd>                             6
-
-# a03.
-<PostBegin>                          1
-<PostEnd>                            1
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 <NoisyPost_BEGIN>
 16
 10
@@ -176,14 +135,9 @@ PcP
 
 # b01.
 <PlotBegin>                          1
-<<<<<<< HEAD
 <PlotEnd>                            8
 
 <DepthMin>                           2691
-=======
-<PlotEnd>                            6
-<DepthMin>                           2841
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f
 <DepthMax>                           2891
 <AnoDepthInc>                        500
 <GridDepthInc>                       10000

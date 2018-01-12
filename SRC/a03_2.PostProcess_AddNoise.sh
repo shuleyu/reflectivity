@@ -106,11 +106,7 @@ EOF
 	# Add Noise.
 	${EXECDIR}/AddNoise.out 1 2 1 << EOF
 ${UniformNoise}
-<<<<<<< HEAD:SRC/a03_2.PostProcess_AddNoise.sh
 tmpfile_file_amp_$$
-=======
-tmpfile_$$
->>>>>>> a4bceae838ef093e31aa92e8d78ab305a85b469f:SRC/a03.PostProcess_AddNoise.sh
 tmpfile_noisefilenames_$$
 ${NoiseLevel}
 EOF
