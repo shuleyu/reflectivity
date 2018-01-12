@@ -1,8 +1,6 @@
-<NoiseLevel>  0.3
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ULVZ
-<ReCompile>                          0
+<WORKDIR>                            /home/shule/PROJ/t035.test
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -15,11 +13,11 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         301
+<BeginIndex>                         1
 
-<RemoveCrust>                        1
-<Remove220>                          1
-<Remove400>                          1
+<RemoveCrust>                        0
+<Remove220>                          0
+<Remove400>                          0
 <Remove670>                          0
 									 -- only 1 or 0, no other values.
 
@@ -38,19 +36,22 @@
 <DISTMIN>                            40
 <DISTMAX>                            85
 <DISTINC>                            0.1
+
 <TargetPhases_BEGIN>
-S
-ScS
+P
+ScP
+PcP
 <TargetPhases_END>
+
 <CertainStaionListFile>
 									 -- Keep it empty: use the AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC above.
 									 -- If it's not empty, use this give file, which has two columns: Gcarc & Az.
 
 # Seismograms.
 <Begin>                              400
-<DELTA>                              0.1
-<LENGTH>                             1638
-<NPTS>                               4096
+<DELTA>                              0.05
+<LENGTH>                             1000
+<NPTS>                               20000
 <VRED>                               0
 
 # Calculation Details.
@@ -59,12 +60,12 @@ ScS
 <V2>                                 8.0
 <V3>                                 35
 <V4>                                 40
-<RaypN>                              2000
+<RaypN>                              3000
 
-<F1>                                 0.006
-<F2>                                 0.01
-<F3>                                 1
-<F4>                                 1.1
+<F1>                                 0.25
+<F2>                                 0.5
+<F3>                                 2
+<F4>                                 4
 
 [ RaypN should be greater than
 
@@ -91,25 +92,25 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ
+<ModelName>                          P
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-25 50 5    1 1 0.05   1   1 1 0.05    1.01 1.10 0.01  -1  1.10 1.10 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+25 25 5    0.9 1.0 0.1   -1   1.0 1.0 0.05    0.8 1.0 0.1  -1  1.0 1.0 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
 # a02.
 <RunReference>                       0
-                                     0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           331
-<RunEnd>                             360
+                                     0  --  Run Modified Model.
+<RunBegin>                           2
+<RunEnd>                             6
 
 # a03.
-<PostBegin>                          301
-<PostEnd>                            360
+<PostBegin>                          1
+<PostEnd>                            1
 <NoisyPost_BEGIN>
 16
 10
@@ -118,17 +119,18 @@ ScS
 103
 134
 <NoisyPost_END>
-<RandomNoiseLevel>                   1
-									 0  --  Noise level is fixed to NoiseLevel for all distances.
-                                     1  --  NoiseLevel is a maximum noise level: different
-									        distances gets a different noise level, which is randomly
-											chosen from 0 ~ NoiseLevel.
+<NoiseLevel>                         0.3
+<UniformNoise>                       0
+									 1  --  Noise level is fixed to NoiseLevel for all distances.
+                                     0  --  NoiseLevel represent a maximum noise level: different
+									        distances gets a different noise level randomly range
+											from 0 ~ NoiseLevel.
 
 
 
 # b01.
-<PlotBegin>                          301
-<PlotEnd>                            360
+<PlotBegin>                          1
+<PlotEnd>                            6
 <DepthMin>                           2841
 <DepthMax>                           2891
 <AnoDepthInc>                        50

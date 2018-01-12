@@ -101,7 +101,7 @@ EOF
 
 	# Add Noise.
 	${EXECDIR}/AddNoise.out 1 2 1 << EOF
-${RandomNoiseLevel}
+${UniformNoise}
 tmpfile_$$
 tmpfile_noisefilenames_$$
 ${NoiseLevel}
