@@ -466,11 +466,11 @@ EOF
     echo ${ModelName}_${count} > crfl.dat.${ModelName}_${count}
     echo ${ModelName}_${count}_reference > crfl.dat.ref
     cat >> crfl.dat.${ModelName}_${count} << EOF
- 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0
+ 0 0 0 0 0   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0
     0    0`printf "%5.2d" ${REFLINDEX}`    1    1
 EOF
     cat >> crfl.dat.ref << EOF
- 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0
+ 0 0 0 0 0   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0
     0    0`printf "%5.2d" ${REFLINDEX}`    1    1
 EOF
 

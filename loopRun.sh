@@ -1,23 +1,13 @@
 #!/bin/bash
 
-count=13
-for V1 in `seq 5.6 0.1 5.9`
+for SNR in 0 0.05 0.1 0.15 0.2 0.25 0.3
 do
-	for More in 0.1
-	do
-		V2=`echo "${V1} ${More}" | awk '{print $1+$2}'`
+	echo "<NoiseLevel>  ${SNR}" > tmpfile_$$
+	awk 'NR>1 {print $0}' INFILE >> tmpfile_$$
+	mv tmpfile_$$ INFILE
 
-		cat > tmpfile_$$ << EOF
-<BeginIndex>  ${count}
-<V1>          ${V1}
-<V2>          ${V2}
-EOF
-		awk 'NR>3 {print $0}' INFILE >> tmpfile_$$
-		mv tmpfile_$$ INFILE
-		./Run.sh
+	./Run.sh
 
-		count=$((count+1))
-	done
 done
 
 
