@@ -96,6 +96,7 @@ int main(int argc, char **argv){
 	for (Cnt=0;Cnt<NPTS;Cnt++){
 		fscanf(fpin,"%lf%*f%*f%*f",&Depth);
 		fprintf(fpout,"%lf\t%lf\t%lf\t%lf\n",Depth,d_vp(Depth),d_vs(Depth),d_rho(Depth));
+		fprintf(fpout,"%lf\t%lf\t%lf\t%lf\n",Depth+0.01,d_vp(Depth+0.01),d_vs(Depth+0.01),d_rho(Depth+0.01));
 	}
 
 	fclose(fpin);

@@ -9,4 +9,7 @@
 
 5. The length of the noise is 400 ~ 500 sec.
 
-6. The begin/end amplitudes are tapered before adding to signal. Because we need to have a continuity.
+6. The noises are looping itself before adding to the signals.
+
+7. The begin/end of the noises are tapered before added to signal: we need to
+have a continuity when wraping around.

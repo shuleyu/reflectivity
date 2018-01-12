@@ -117,9 +117,9 @@ int main(int argc, char **argv){
     char   **PS;
     double *P;
 
-    enum PIenum {RaypN,NPTS,M1,M2,LayerN,RemoveCrust,Remove220,Remove400,Remove670};
+    enum PIenum {RaypN,NPTS,M1,M2,LayerN,RemoveCrust,Remove220,Remove400,Remove670,PREM_X};
     enum PSenum {Model,PREM,Model_Out,Suffix,CertainStation,tmpfile_reflzone};
-    enum Penum  {strike,dip,rake,EVDE,AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC,REDE,BEGIN,V1,V2,V3,V4,F1,F2,F3,F4,ATTEN,DELTA,M3,M4,LENGTH,OMARKER,VRED,LayerInc,ReflDepth};
+    enum Penum  {strike,dip,rake,EVDE,AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC,REDE,BEGIN,V1,V2,V3,V4,F1,F2,F3,F4,ATTEN,DELTA,M3,M4,OMARKER,VRED,LayerInc,ReflDepth};
 
     int_num=atoi(argv[1]);
     string_num=atoi(argv[2]);
@@ -159,6 +159,8 @@ int main(int argc, char **argv){
     int    AZN,DISTN,count2,count3,position,PREM_Discon,Model_Discon,PREM_Anchor,Model_Anchor,PREM_Rollback,Model_Rollback,position2,position3,isdiscon,isanchor,rollback,flag,flag2,reflindex,Total;
     double kmperdeg,realaz,*RollbackDepth,*DisconDepth,*AnchorDepth,*height,*vp1,*vp2,*vs1,*vs2,*rho1,*rho2,h;
     double RHO,VP,VS,QP,QS,tmp1,tmp2,tmp3,tmp4,tmp5,dvp,dvs,drho,change,topdepth,downdepth,h_refl,VP_refl,VS_refl,VS_refl_model,VP_refl_model;
+
+	if (PI[PREM_X]==1) PI[RemoveCrust]=PI[Remove220]=PI[Remove400]=PI[Remove670]=1;
 
 	Total=2*PI[RemoveCrust]+PI[Remove220]+PI[Remove400]+PI[Remove670];
     PREM_Discon=8-Total;
@@ -215,15 +217,6 @@ int main(int argc, char **argv){
     DISTN=(int)floor((P[DISTMAX]-P[DISTMIN])/P[DISTINC])+1;
     P[AZMAX]=P[AZMIN]+P[AZINC]*(AZN-1);
     P[DISTMAX]=P[DISTMIN]+P[DISTINC]*(DISTN-1);
-
-    PI[NPTS]=pow(2,(int)ceil(log(PI[NPTS])/log(2)));
-    if ((PI[NPTS]-1)*P[DELTA]<P[LENGTH]){
-        PI[NPTS]=pow(2,(int)ceil(log(P[LENGTH]/P[DELTA])/log(2)));
-        P[LENGTH]=(PI[NPTS]-1)*P[DELTA];
-    }
-    else {
-        P[LENGTH]=(PI[NPTS]-1)*P[DELTA];
-    }
 
     // Properties of the source.
     fprintf(fpout,"%10.4lf\n",P[REDE]);
@@ -398,7 +391,13 @@ int main(int argc, char **argv){
             isanchor=0;
         }
 
-        prem_smoothed(h,&RHO,&VP,&tmp1,&VS,&tmp2,&tmp3,&tmp4,&tmp5,PI[RemoveCrust],PI[Remove220],PI[Remove400],PI[Remove670]);
+		if (PI[PREM_X]==1){
+			prem_x(h,&RHO,&VP,&tmp1,&VS,&tmp2,&tmp3,&tmp4,&tmp5);
+		}
+		else {
+			prem_smoothed(h,&RHO,&VP,&tmp1,&VS,&tmp2,&tmp3,&tmp4,&tmp5,PI[RemoveCrust],PI[Remove220],PI[Remove400],PI[Remove670]);
+		}
+
         if (VS<0.001){
             VS=0.001;
         }
@@ -440,7 +439,13 @@ int main(int argc, char **argv){
         if(isdiscon==1){
             h+=0.001;
 
-            prem_smoothed(h,&RHO,&VP,&tmp1,&VS,&tmp2,&tmp3,&tmp4,&tmp5,PI[RemoveCrust],PI[Remove220],PI[Remove400],PI[Remove670]);
+			if (PI[PREM_X]==1){
+				prem_x(h,&RHO,&VP,&tmp1,&VS,&tmp2,&tmp3,&tmp4,&tmp5);
+			}
+			else {
+				prem_smoothed(h,&RHO,&VP,&tmp1,&VS,&tmp2,&tmp3,&tmp4,&tmp5,PI[RemoveCrust],PI[Remove220],PI[Remove400],PI[Remove670]);
+			}
+
             if (VS<0.001){
                 VS=0.001;
             }
@@ -494,13 +499,14 @@ int main(int argc, char **argv){
 
             if (P[V1]<VS_refl || P[V1]<VS_refl_model){
                 printf("Warning ! Phase velocity V1 may be too small !\n");
+                printf("--------- %.3lf < %.3lf (%.3lf)...\n",P[V1],VS_refl,VS_refl_model);
             }
 
             printf("Given Phase velocity window is ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",P[V1],P[V2],P[V3],P[V4]);
             tmp1=6371.0/(6371.0-h_refl);
             printf("After earth-flatening conversion ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",tmp1*P[V1],tmp1*P[V2],tmp1*P[V3],tmp1*P[V4]);
             tmp1=pow((6371-h_refl),2)/6371.0*M_PI/180.0;
-            printf("According to Rayp Range: %.2lf ~ %.2lf.\n",tmp1/P[V3],tmp1/P[V2]);
+            printf("According to Rayp Range: %.2lf(V3) ~ %.2lf(V2).\n",tmp1/P[V3],tmp1/P[V2]);
         }
 
         h+=P[LayerInc];

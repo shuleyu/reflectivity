@@ -8,7 +8,7 @@
 # ==============================================================
 
 echo ""
-echo "--> `basename $0` is running."
+echo "--> `basename $0` is running. (`date`)"
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
 trap "rm -rf ${EXECDIR}/*.out ${ModelName}_* *index; exit 1" SIGINT
@@ -340,13 +340,14 @@ do
     mkdir -p ${WORKDIR}/${ModelName}_${count}
     cd ${WORKDIR}/${ModelName}_${count}
     mv ${WORKDIR}/${ModelName}_$((count-BeginIndex+1)).model ${WORKDIR}/${ModelName}_${count}/ModelInput
+	echo "${strike} ${dip} ${rake} ${EVDE}" > ${WORKDIR}/${ModelName}_${count}/Source
 #     mv ${WORKDIR}/${ModelName}_${count}.model ${WORKDIR}/${ModelName}_${count}/ModelInput
 
     # Generate modified reference model.
 	if [ -z "${CertainStaionListFile}" ]
 	then # If we use DISTMIN,DISTMAX,AZMIN,AZMAX
 
-		${EXECDIR}/GenModel.out 9 7 29 << EOF
+		${EXECDIR}/GenModel.out 10 7 28 << EOF
 ${RaypN}
 ${NPTS}
 ${M1}
@@ -356,6 +357,7 @@ ${RemoveCrust}
 ${Remove220}
 ${Remove400}
 ${Remove670}
+${PREM_X}
 ModelInput
 ReferenceModel
 ModelOutput
@@ -387,7 +389,6 @@ ${ATTEN}
 ${DELTA}
 ${M3}
 ${M4}
-${LENGTH}
 ${OMARKER}
 ${VRED}
 ${LayerInc}
@@ -400,7 +401,7 @@ EOF
 		fi
 	else
 
-		${EXECDIR}/GenModel_CertainStations.out 9 6 29 << EOF
+		${EXECDIR}/GenModel_CertainStations.out 10 6 28 << EOF
 ${RaypN}
 ${NPTS}
 ${M1}
@@ -410,6 +411,7 @@ ${RemoveCrust}
 ${Remove220}
 ${Remove400}
 ${Remove670}
+${PREM_X}
 ModelInput
 ReferenceModel
 ModelOutput
@@ -440,7 +442,6 @@ ${ATTEN}
 ${DELTA}
 ${M3}
 ${M4}
-${LENGTH}
 ${OMARKER}
 ${VRED}
 ${LayerInc}

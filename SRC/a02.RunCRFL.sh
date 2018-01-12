@@ -8,7 +8,7 @@
 # ==============================================================
 
 echo ""
-echo "--> `basename $0` is running."
+echo "--> `basename $0` is running. (`date`)"
 cd ${WORKDIR}
 
 # ================================================
@@ -30,7 +30,7 @@ do
 
     cd ${dir}
     trap "rm -f ${dir}/crfl.dat ${dir}/crfl.sh ${dir}/crfl.psv ${dir}/crfl.out; exit 1" SIGINT
-    echo "    ==> Running reflectivity method on ${Model}.."
+    echo "    ==> Running reflectivity method on ${Model}..  (`date`)"
 
     if [ ${RunReference} -eq 1 ]
     then

@@ -20,7 +20,7 @@ using namespace std;
 
 int main(int argc, char **argv){
 
-    enum PIenum{RandomNoiseLevel,FLAG1};
+    enum PIenum{UniformNoise,FLAG1};
     enum PSenum{FileList,NoiseFiles,FLAG2};
     enum Penum{NoiseLevel,FLAG3};
 
@@ -173,7 +173,7 @@ int main(int argc, char **argv){
 
 	// For each signal, assign a random/fixed noise level.
 	double *NL=new double [nptsx];
-	if (PI[RandomNoiseLevel]==1){
+	if (PI[UniformNoise]!=1){
 		random_num(NL,nptsx);
 		for (int index1=0;index1<nptsx;index1++){
 			NL[index1]*=P[NoiseLevel];

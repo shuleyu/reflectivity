@@ -8,7 +8,7 @@
 # ==============================================================
 
 echo ""
-echo "--> `basename $0` is running."
+echo "--> `basename $0` is running. (`date`)"
 cd ${WORKDIR}
 
 # ================================================
@@ -28,6 +28,10 @@ do
 	else
 		echo "    ==> Running post-process on ${Model}.."
 	fi
+
+
+	# Get source depth.
+	read A B C EVDE < ${dir}/Source
 
 
     # Note down calculation information.
@@ -95,14 +99,14 @@ EOF
     done
 
 	# Assume the max amplitude of the synthesis is the amplitude of S wave.
-	saclst depmax KSTNM depmin f `cat tmpfile_filelist_$$` | awk '{if ($2>-$4) print $1,$2; else print $1,-$4}'> tmpfile_$$
+	saclst depmax KSTNM depmin f `cat tmpfile_filelist_$$` | awk '{if ($2>-$4) print $1,$2; else print $1,-$4}'> tmpfile_file_amp_$$
 
 	ls ${SRCDIR}/Noises/*sac > tmpfile_noisefilenames_$$
 
 	# Add Noise.
 	${EXECDIR}/AddNoise.out 1 2 1 << EOF
-${RandomNoiseLevel}
-tmpfile_$$
+${UniformNoise}
+tmpfile_file_amp_$$
 tmpfile_noisefilenames_$$
 ${NoiseLevel}
 EOF

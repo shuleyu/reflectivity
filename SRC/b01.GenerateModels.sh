@@ -9,7 +9,7 @@
 # ==============================================================
 
 echo ""
-echo "--> `basename $0` is running."
+echo "--> `basename $0` is running. (`date`)"
 mkdir -p ${PLOTDIR}/tmpdir_$$
 cd ${PLOTDIR}/tmpdir_$$
 trap "rm -rf ${PLOTDIR}/tmpdir_$$; exit 1" SIGINT EXIT
@@ -67,18 +67,17 @@ EOF
     ${EXECDIR}/plotmodel.out 1 2 0 << EOF
 `wc -l < ${WORKDIR}/${ModelName}_${count}/ReferenceModel`
 ${WORKDIR}/${ModelName}_${count}/ReferenceModel
-tmpfile1_prem
+tmpfile1_ref
 EOF
 
 	# Output Unmodified PREM.
 	${EXECDIR}/PREM.out 0 2 0 << EOF
-tmpfile1_prem
+tmpfile1_ref
 tmpfile1_real_prem
 EOF
 
 
 	paste ${BASHCODEDIR}/prem_profile.txt tmpfile_ulvz > tmpfile_$$
-	paste tmpfile1_prem tmpfile1_ulvz tmpfile1_real_prem > tmpfile1_$$
 
     # ================================================
     #             ! PLOT !
@@ -86,7 +85,8 @@ EOF
 
     OUTFILE=tmp.ps
     PROJ="-JX`echo "7 *6 / 7 / 3" | bc -l`i/5i"
-    REG="-R-40/40/`echo "2891-${DepthMax}"| bc -l`/`echo "2891-${DepthMin}"| bc -l`"
+#     REG="-R-40/40/`echo "2891-${DepthMax}"| bc -l`/`echo "2891-${DepthMin}"| bc -l`"
+    REG="-R0/16/`echo "2891-${DepthMax}"| bc -l`/`echo "2891-${DepthMin}"| bc -l`"
 
     ## Plot title.
     pstext -R0/6371/-1/1 ${PROJ} -Y8i -N -K > ${OUTFILE} << EOF
@@ -94,28 +94,40 @@ EOF
 EOF
 
     # P velocity.
-    psbasemap ${REG} ${PROJ} -Ba${AnoyInc}g${GridyInc}f${TickyInc}:"dVp (%)":/a${AnoDepthInc}g${GridDepthInc}f${TickDepthInc}:"Height above CMB (km)":WSne -Y-7i -O -K >> ${OUTFILE}
-    awk '{print 0,2891-$1}' tmpfile_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
-    awk '{print 0,2891-$1}' tmpfile1_$$ | psxy -R -J -Sx0.03i -Wblack -O -K >> ${OUTFILE}
-    awk '{print ($2/$10-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
-    awk '{print ($6/$2-1)*100,2891-$1}' tmpfile_$$ | psxy -R -J -Wred -O -K >> ${OUTFILE}
-    awk '{print ($6/$10-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -S+0.03i -Wred -O -K >> ${OUTFILE}
+    psbasemap ${REG} ${PROJ} -Ba${AnoyInc}g${GridyInc}f${TickyInc}:"Vp (km/s)":/a${AnoDepthInc}g${GridDepthInc}f${TickDepthInc}:"Height above CMB (km)":WSne -Y-7i -O -K >> ${OUTFILE}
+#     awk '{print 0,2891-$1}' tmpfile_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+#     awk '{print 0,2891-$1}' tmpfile1_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+#     awk '{print ($2/$10-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
+#     awk '{print ($6/$2-1)*100,2891-$1}' tmpfile_$$ | psxy -R -J -Wred -O -K >> ${OUTFILE}
+#     awk '{print ($6/$10-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sx0.03i -Wred -O -K >> ${OUTFILE}
+
+    awk '{print $2,2891-$1}' tmpfile1_real_prem | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+    awk '{print $2,2891-$1}' tmpfile1_ref | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
+    awk '{print $2,2891-$1}' tmpfile1_ulvz | psxy -R -J -Sx0.03i -Wred -O -K >> ${OUTFILE}
 
     # S velocity.
-    psbasemap ${REG} ${PROJ} -Ba${AnoyInc}g${GridyInc}f${TickyInc}:"dVs (%)":/a${AnoDepthInc}g${GridDepthInc}f${TickDepthInc}:"Height above CMB (km)":WSne -X`echo "10/3" | bc -l`i -O -K >> ${OUTFILE}
-    awk '{if ($3!=0) print 0,2891-$1; else print -100,2891-$1}' tmpfile_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
-    awk '{print 0,2891-$1}' tmpfile1_$$ | psxy -R -J -Sx0.03i -Wblack -O -K >> ${OUTFILE}
-    awk '{if ($11!=0) print ($3/$11-1)*100,2891-$1; else print -100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
-    awk '{if ($3!=0) print ($7/$3-1)*100,2891-$1; else print -100,2891-$1}' tmpfile_$$ | psxy -R -J -Wred -O -K >> ${OUTFILE}
-    awk '{if ($11!=0) print ($7/$11-1)*100,2891-$1; else print -100,2891-$1}' tmpfile1_$$ | psxy -R -J -S+0.03i -Wred -O -K >> ${OUTFILE}
+    psbasemap ${REG} ${PROJ} -Ba${AnoyInc}g${GridyInc}f${TickyInc}:"Vs (km/s)":/a${AnoDepthInc}g${GridDepthInc}f${TickDepthInc}:"Height above CMB (km)":WSne -X`echo "10/3" | bc -l`i -O -K >> ${OUTFILE}
+#     awk '{if ($3!=0) print 0,2891-$1; else print -100,2891-$1}' tmpfile_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+#     awk '{print 0,2891-$1}' tmpfile1_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+#     awk '{if ($11!=0) print ($3/$11-1)*100,2891-$1; else print -100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
+#     awk '{if ($3!=0) print ($7/$3-1)*100,2891-$1; else print -100,2891-$1}' tmpfile_$$ | psxy -R -J -Wred -O -K >> ${OUTFILE}
+#     awk '{if ($11!=0) print ($7/$11-1)*100,2891-$1; else print -100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sx0.03i -Wred -O -K >> ${OUTFILE}
+
+    awk '{print $3,2891-$1}' tmpfile1_real_prem | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+    awk '{print $3,2891-$1}' tmpfile1_ref | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
+    awk '{print $3,2891-$1}' tmpfile1_ulvz | psxy -R -J -Sx0.03i -Wred -O -K >> ${OUTFILE}
 
     # Density.
-    psbasemap ${REG} ${PROJ} -Ba${AnoyInc}g${GridyInc}f${TickyInc}:"dRho (%)":/a${AnoDepthInc}g${GridDepthInc}f${TickDepthInc}:"Height above CMB (km)":WSne -X`echo "10/3" | bc -l`i -O -K >> ${OUTFILE}
-    awk '{print 0,2891-$1}' tmpfile_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
-    awk '{print 0,2891-$1}' tmpfile1_$$ | psxy -R -J -Sx0.03i -Wblack -O -K >> ${OUTFILE}
-    awk '{print ($4/$12-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
-    awk '{print ($8/$4-1)*100,2891-$1}' tmpfile_$$ | psxy -R -J -Wred -O -K >> ${OUTFILE}
-    awk '{print ($8/$12-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -S+0.03i -Wred -O -K >> ${OUTFILE}
+    psbasemap ${REG} ${PROJ} -Ba${AnoyInc}g${GridyInc}f${TickyInc}:"Rho (g/cm3)":/a${AnoDepthInc}g${GridDepthInc}f${TickDepthInc}:"Height above CMB (km)":WSne -X`echo "10/3" | bc -l`i -O -K >> ${OUTFILE}
+#     awk '{print 0,2891-$1}' tmpfile_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+#     awk '{print 0,2891-$1}' tmpfile1_$$ | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+#     awk '{print ($4/$12-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
+#     awk '{print ($8/$4-1)*100,2891-$1}' tmpfile_$$ | psxy -R -J -Wred -O -K >> ${OUTFILE}
+#     awk '{print ($8/$12-1)*100,2891-$1}' tmpfile1_$$ | psxy -R -J -Sx0.03i -Wred -O -K >> ${OUTFILE}
+
+    awk '{print $4,2891-$1}' tmpfile1_real_prem | psxy -R -J -Wblack -O -K >> ${OUTFILE}
+    awk '{print $4,2891-$1}' tmpfile1_ref | psxy -R -J -Sc0.03i -Wblue -O -K >> ${OUTFILE}
+    awk '{print $4,2891-$1}' tmpfile1_ulvz | psxy -R -J -Sx0.03i -Wred -O -K >> ${OUTFILE}
 
     # Make PDF.
     psxy -R -J -O >> ${OUTFILE} << EOF

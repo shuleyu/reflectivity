@@ -8,7 +8,7 @@
 # ==============================================================
 
 echo ""
-echo "--> `basename $0` is running."
+echo "--> `basename $0` is running. (`date`)"
 cd ${WORKDIR}
 
 # ================================================
@@ -92,7 +92,8 @@ do
 # 		;;
 # esac
 
-
+	# Get source depth.
+	read A B C EVDE < ${dir}/Source
 
 
     # Note down calculation information.

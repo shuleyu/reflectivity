@@ -1,8 +1,6 @@
-<NoiseLevel>  0.3
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ULVZ
-<ReCompile>                          0
+<WORKDIR>                            /home/shule/PROJ/t039.UHVZ
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -15,13 +13,15 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         301
+<BeginIndex>                         1
 
-<RemoveCrust>                        1
-<Remove220>                          1
-<Remove400>                          1
+<RemoveCrust>                        0
+<Remove220>                          0
+<Remove400>                          0
 <Remove670>                          0
+<PREM_X>                             1
 									 -- only 1 or 0, no other values.
+									 -- PREM_X will overrule other switches.
 
 # Source. ( CMT in deg.)
 <strike>                             0
@@ -48,23 +48,29 @@ ScS
 
 # Seismograms.
 <Begin>                              400
-<DELTA>                              0.1
-<LENGTH>                             1638
-<NPTS>                               4096
+
+<DELTA>                              0.05
+<NPTS>                               32768
+									 -- NPTS must be 2^N.
+									 -- DELTA*NPTS is the first factor of calculation time.
+
+
 <VRED>                               0
 
 # Calculation Details.
-<ReflDepth>                          680
+<ReflDepth>                          50
 <V1>                                 7.0
 <V2>                                 8.0
 <V3>                                 35
 <V4>                                 40
 <RaypN>                              2000
+									 -- RaypN is the second factor of calculation time.
 
 <F1>                                 0.006
 <F2>                                 0.01
-<F3>                                 1
+<F3>                                 1.0
 <F4>                                 1.1
+                                     -- (f2-f1) is the third factor of calculation time.
 
 [ RaypN should be greater than
 
@@ -91,12 +97,12 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ
+<ModelName>                          UHVZ
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-25 50 5    1 1 0.05   1   1 1 0.05    1.01 1.10 0.01  -1  1.10 1.10 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+5 20 5    1 1 0.05   1   1 1 0.05    1.05 1.1 0.05  -1  1.1 1.1 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
@@ -104,12 +110,14 @@ ScS
 <RunReference>                       0
                                      0  --  Run Modified Model.
                                      1  --  Run PREM.
-<RunBegin>                           331
-<RunEnd>                             360
+<RunBegin>                           7
+<RunEnd>                             8
 
-# a03.
-<PostBegin>                          301
-<PostEnd>                            360
+# a03_1.
+<PostBegin>                          1
+<PostEnd>                            8
+
+# a03_2.
 <NoisyPost_BEGIN>
 16
 10
@@ -118,22 +126,24 @@ ScS
 103
 134
 <NoisyPost_END>
-<RandomNoiseLevel>                   1
-									 0  --  Noise level is fixed to NoiseLevel for all distances.
-                                     1  --  NoiseLevel is a maximum noise level: different
-									        distances gets a different noise level, which is randomly
-											chosen from 0 ~ NoiseLevel.
+<NoiseLevel>                         0.3
+<UniformNoise>                       0
+									 1  --  Noise level is fixed to NoiseLevel for all distances.
+                                     0  --  NoiseLevel represent a maximum noise level: different
+									        distances gets a different noise level randomly range
+											from 0 ~ NoiseLevel.
 
 
 
 # b01.
-<PlotBegin>                          301
-<PlotEnd>                            360
-<DepthMin>                           2841
+<PlotBegin>                          1
+<PlotEnd>                            8
+
+<DepthMin>                           2691
 <DepthMax>                           2891
-<AnoDepthInc>                        50
-<GridDepthInc>                       10
-<TickDepthInc>                       10
+<AnoDepthInc>                        500
+<GridDepthInc>                       10000
+<TickDepthInc>                       100
 <AnoyInc>                            10
 <GridyInc>                           5
 <TickyInc>                           1
