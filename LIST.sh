@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # ${SRCDIR}/a01.GenerateModels.sh
-# ${SRCDIR}/a02.RunCRFL.sh
+${SRCDIR}/a02.RunCRFL.sh
 ${SRCDIR}/a03_1.PostProcess.sh
 # ${SRCDIR}/a03_2.PostProcess_AddNoise.sh
-# ${SRCDIR}/a04.UpdateIndex.sh
+# ${SRCDIR}/a03_3.AddDataNoise.sh
 
 # ${SRCDIR}/b01.GenerateModels.sh
 #  ================        Supplementary        ==================

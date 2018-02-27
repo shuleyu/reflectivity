@@ -101,7 +101,7 @@ then
 
 	INCLUDEDIR="-I${SACDIR}/include -I${CCODEDIR}"
 	LIBRARYDIR="-L. -L${SACDIR}/lib -L${CCODEDIR}"
-	LIBRARIES="-lASU_tools -lsac -lsacio -lm"
+	LIBRARIES="-lASU_tools -lsac -lsacio -lfftw3 -lm"
 
 	# ASU_tools Functions.
 	cd ${CCODEDIR}

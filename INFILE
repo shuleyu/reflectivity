@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.UHVZ
+<WORKDIR>                            /home/shule/PROJ/t039.PREM_X
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -26,7 +26,7 @@
 # Source. ( CMT in deg.)
 <strike>                             0
 <dip>                                90
-<rake>                               0
+<rake>                               -130
 <EVDE>                               500
 <OMARKER>                            0
 
@@ -40,9 +40,8 @@
 <DISTINC>                            0.1
 
 <TargetPhases_BEGIN>
-P
-ScP
-PcP
+S
+ScS
 <TargetPhases_END>
 
 <CertainStaionListFile>
@@ -52,12 +51,13 @@ PcP
 # Seismograms.
 <Begin>                              400
 <DELTA>                              0.05
-<LENGTH>                             1000
-<NPTS>                               20000
+<NPTS>                               32768
+                                     -- NPTS Must be 2^N.
+                                     -- Signal length will be DELTA*(NPTS-1).
 <VRED>                               0
 
 # Calculation Details.
-<ReflDepth>                          50
+<ReflDepth>                          680
 <V1>                                 7.0
 <V2>                                 8.0
 <V3>                                 35
@@ -96,26 +96,34 @@ PcP
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          UHVZ
+<ModelName>                          PREM_X
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-5 20 5    1 1 0.05   1   1 1 0.05    1.05 1.1 0.05  -1  1.1 1.1 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+10 10 10    1 1 0.05   1   1 1 0.05    1.00 1.17 0.17  -1  1.20 1.20 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+20 20 10    1 1 0.05   1   1 1 0.05    1.00 1.00 0.01  1  0.00 1.00 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           7
-<RunEnd>                             8
+<RunBegin>                           1
+<RunEnd>                             2
 
 # a03_1.
 <PostBegin>                          1
-<PostEnd>                            8
+<PostEnd>                            2
 
 # a03_2.
+<NoiseLevel>                         0.3
+<UniformNoise>                       0
+									 1  --  Noise level is fixed to NoiseLevel for all distances.
+                                     0  --  NoiseLevel represent a maximum noise level: different
+									        distances gets a different noise level randomly range
+											from 0 ~ NoiseLevel.
+
 <NoisyPost_BEGIN>
 16
 10
@@ -124,22 +132,27 @@ PcP
 103
 134
 <NoisyPost_END>
-<NoiseLevel>                         0.3
-<UniformNoise>                       0
-									 1  --  Noise level is fixed to NoiseLevel for all distances.
-                                     0  --  NoiseLevel represent a maximum noise level: different
-									        distances gets a different noise level randomly range
-											from 0 ~ NoiseLevel.
 
+# a03_3. Create a similar dataset as the data.
+<OutPutDirectory>                    /home/shule/PROJ/t039.ULVZ_Noisy_CA_D
+<DB>                                 CA_D
+<SYNDB>                              REFL_ULVZ
+<DataNoiseF1>                        0.020
+<DataNoiseF2>                        0.3
+<AddNoise>                           1
 
+<DataNoise_BEGIN>
+41
+72
+<DataNoise_END>
 
 # b01.
 <PlotBegin>                          1
-<PlotEnd>                            8
+<PlotEnd>                            2
 
-<DepthMin>                           2691
+<DepthMin>                           2591
 <DepthMax>                           2891
-<AnoDepthInc>                        500
+<AnoDepthInc>                        100
 <GridDepthInc>                       10000
 <TickDepthInc>                       100
 <AnoyInc>                            10

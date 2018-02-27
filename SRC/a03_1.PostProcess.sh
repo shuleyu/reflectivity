@@ -117,26 +117,26 @@ do
 	find . -iname "*sac" -exec rm '{}' \;
 
     # Run crfl2sac on R and Z component. Make SAC files.
-    ${EXECDIR}/crfl2sac.out > /dev/null << EOF
-${file_psv}
-n
-EOF
-    if [ $? -ne 0 ]
-    then
-        echo "!=> crfl2sac psv Abort on ${Model} !"
-        exit 1;
-    fi
-    rm -f crfl.psv
-
-    for file in `ls *.h`
-    do
-        mv ${file} ${EQname}.${Model}.${file%h}THR.sac
-    done
-
-    for file in `ls *.v`
-    do
-        mv ${file} ${EQname}.${Model}.${file%v}THZ.sac
-    done
+#     ${EXECDIR}/crfl2sac.out > /dev/null << EOF
+# ${file_psv}
+# n
+# EOF
+#     if [ $? -ne 0 ]
+#     then
+#         echo "!=> crfl2sac psv Abort on ${Model} !"
+#         exit 1;
+#     fi
+#     rm -f crfl.psv
+# 
+#     for file in `ls *.h`
+#     do
+#         mv ${file} ${EQname}.${Model}.${file%h}THR.sac
+#     done
+# 
+#     for file in `ls *.v`
+#     do
+#         mv ${file} ${EQname}.${Model}.${file%v}THZ.sac
+#     done
 
     # Run crfl2sac on T component. Make SAC files.
     ${EXECDIR}/crfl2sac.out > /dev/null << EOF
@@ -228,25 +228,25 @@ EOF
 
 
     # Creat false components.
-# 	rm -f sac.macro
-#     for file in `find ${WORKDIR}/${EQname} -iname "*T.sac"`
-#     do
-# 		cat >> sac.macro << EOF
-# cut b 0 1
-# r ${file}
-# ch KCMPNM THR
-# w ${file%T.sac}R.sac
-# ch KCMPNM THZ
-# w ${file%T.sac}Z.sac
-# EOF
-#     done
-# 
-#     cat >> sac.macro << EOF
-# q
-# EOF
-#     sac >/dev/null << EOF
-# m sac.macro
-# EOF
+	rm -f sac.macro
+    for file in `find ${WORKDIR}/${EQname} -iname "*T.sac"`
+    do
+		cat >> sac.macro << EOF
+cut b 0 1
+r ${file}
+ch KCMPNM THR
+w ${file%T.sac}R.sac
+ch KCMPNM THZ
+w ${file%T.sac}Z.sac
+EOF
+    done
+
+    cat >> sac.macro << EOF
+q
+EOF
+    sac >/dev/null << EOF
+m sac.macro
+EOF
 
     # Clean up.
     rm -f sac.macro sac.output
