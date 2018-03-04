@@ -490,22 +490,29 @@ int main(int argc, char **argv){
 
         if (h>P[ReflDepth] && flag2==0){
             flag2=1;
+            tmp1=6371.0/(6371.0-h_refl);
             printf("\nLayer @ %.2lf ~ %.2lf km is the first refl. zone layer.\n\n",h_refl,h);
 
-            printf("Velocity (after earth-flatening) in the layer right above refl. zone is:\n");
-            printf("PREM  Vp / Vs: %.2lf / %.2lf \n",VP_refl,VS_refl);
-            printf("Model Vp / Vs: %.2lf / %.2lf \n\n",VP_refl_model,VS_refl_model);
+            printf("Velocity (before,after earth-flatening) in the layer right above refl. zone is:\n");
+            printf("PREM  Vp / Vs: %.2lf,%.2lf / %.2lf,%.2lf \n",VP_refl,VP_refl*tmp1,VS_refl,VS_refl*tmp1);
+            printf("Model Vp / Vs: %.2lf,%.2lf / %.2lf,%.2lf \n\n",VP_refl_model,VP_refl_model*tmp1,VS_refl_model,VS_refl_model*tmp1);
 
-            if (P[V1]<VS_refl || P[V1]<VS_refl_model){
-                printf("Warning ! Phase velocity V1 may be too small !\n");
-                printf("--------- %.3lf < %.3lf (%.3lf)...\n",P[V1],VS_refl,VS_refl_model);
-            }
+//             if (P[V1]<VS_refl || P[V1]<VS_refl_model){
+//                 printf("Warning ! Phase velocity V1 may be too small !\n");
+//                 printf("--------- %.3lf < %.3lf (%.3lf)...\n",P[V1],VS_refl,VS_refl_model);
+//             }
 
             printf("Given Phase velocity window is ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",P[V1],P[V2],P[V3],P[V4]);
-            tmp1=6371.0/(6371.0-h_refl);
-            printf("After earth-flatening conversion ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",tmp1*P[V1],tmp1*P[V2],tmp1*P[V3],tmp1*P[V4]);
-            tmp1=pow((6371-h_refl),2)/6371.0*M_PI/180.0;
-            printf("According to Rayp Range: %.2lf(V3) ~ %.2lf(V2).\n",tmp1/P[V3],tmp1/P[V2]);
+//             printf("After earth-flatening conversion ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",tmp1*P[V1],tmp1*P[V2],tmp1*P[V3],tmp1*P[V4]);
+//             tmp1=pow((6371-h_refl),2)/6371.0*M_PI/180.0;
+//             printf("According to Rayp Range: %.2lf(V3) ~ %.2lf(V2).\n",tmp1/P[V3],tmp1/P[V2]);
+
+            printf("According to TakeOff Range: \n");
+            printf("According to P TakeOff (in deg): %.2lf(V4),%.2lf(V3) ~ %.2lf(V2),%.2lf(V1).\n",
+                    180/M_PI*asin(VP_refl/P[V4]*tmp1),180/M_PI*asin(VP_refl/P[V3]*tmp1),180/M_PI*asin(VP_refl/P[V2]*tmp1),180/M_PI*asin(VP_refl/P[V1]*tmp1));
+            printf("According to S TakeOff (in deg): %.2lf(V4),%.2lf(V3) ~ %.2lf(V2),%.2lf(V1).\n",
+                    180/M_PI*asin(VS_refl/P[V4]*tmp1),180/M_PI*asin(VS_refl/P[V3]*tmp1),180/M_PI*asin(VS_refl/P[V2]*tmp1),180/M_PI*asin(VS_refl/P[V1]*tmp1));
+
         }
 
         h+=P[LayerInc];

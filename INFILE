@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.PREM_X
+<WORKDIR>                            /home/shule/PROJ/t039.test
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -13,7 +13,7 @@
 <CPPFLAG>                            -std=c++14 -Wall
 
 # a01.
-<BeginIndex>                         1
+<BeginIndex>                         3
 
 <RemoveCrust>                        0
 <Remove220>                          0
@@ -57,11 +57,11 @@ ScS
 <VRED>                               0
 
 # Calculation Details.
-<ReflDepth>                          680
-<V1>                                 7.0
-<V2>                                 8.0
-<V3>                                 35
-<V4>                                 40
+<ReflDepth>                          500
+<V1>                                 6.5
+<V2>                                 7.0
+<V3>                                 19
+<V4>                                 30
 <RaypN>                              2000
 									 -- RaypN is the second factor of calculation time.
 
@@ -70,15 +70,6 @@ ScS
 <F3>                                 1.0
 <F4>                                 1.1
                                      -- (f2-f1) is the third factor of calculation time.
-
-[ RaypN should be greater than
-
-       ( max delta in km ) * ( max freq of interest )
-      -----------------------------------------------
-        ( minimum phase velocity integrating )
-
-           = DISTMAX * 111.195 * F4 / V1
-]
 
 <ATTEN>                              0.0
                                      0.0   --   attenuation not relative to frequency.
@@ -96,25 +87,24 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          PREM_X
+<ModelName>                          ULVZ
 <LayerInc>                           10
 
 
 <Model_BEGIN>
-10 10 10    1 1 0.05   1   1 1 0.05    1.00 1.17 0.17  -1  1.20 1.20 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
-20 20 10    1 1 0.05   1   1 1 0.05    1.00 1.00 0.01  1  0.00 1.00 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+10 10 10    1 1 0.05   1   1 1 0.05    1.00 1.00 0.1  -1  1.00 1.00 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           1
-<RunEnd>                             2
+<RunBegin>                           3
+<RunEnd>                             3
 
 # a03_1.
-<PostBegin>                          1
-<PostEnd>                            2
+<PostBegin>                          3
+<PostEnd>                            3
 
 # a03_2.
 <NoiseLevel>                         0.3

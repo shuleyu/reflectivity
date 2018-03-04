@@ -197,7 +197,7 @@ EOF
 #         cat >> sac.macro << EOF
 # r ${Rcomp} ${Tcomp} ${Zcomp}
         cat >> sac.macro << EOF
-r ${Rcomp} ${Tcomp} ${Zcomp}
+r ${Tcomp}
 ch gcarc ${Gcarc} az ${AZ} KSTNM ${STNM}
 w over
 EOF
