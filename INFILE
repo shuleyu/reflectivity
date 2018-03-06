@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.test
+<WORKDIR>                            /home/shule/PROJ/t039.ScS_Test
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -9,12 +9,12 @@
 <FCOMP>                              gfortran
 <FFLAG>                              -std=legacy
 <CCOMP>                              gcc
-<CFLAG>                              -fPIC
+<CFLAG>                              -fPIC -Wall
 <CPPCOMP>                            c++
-<CPPFLAG>                            -std=c++14 -fPIC
+<CPPFLAG>                            -std=c++14 -fPIC -Wall
 
 # a01.
-<BeginIndex>                         4
+<BeginIndex>                         1
 
 <RemoveCrust>                        0
 <Remove220>                          0
@@ -59,10 +59,10 @@ ScS
 
 # Calculation Details.
 <ReflDepth>                          500
-<V1>                                 6.5
-<V2>                                 7.0
-<V3>                                 19
-<V4>                                 30
+<V1>                                 7.0
+<V2>                                 8.0
+<V3>                                 35
+<V4>                                 45
 <RaypN>                              2000
 									 -- RaypN is the second factor of calculation time.
 
@@ -88,7 +88,7 @@ ScS
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ
+<ModelName>                          PREM
 <LayerInc>                           10
 
 
@@ -100,12 +100,12 @@ ScS
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           4
-<RunEnd>                             4
+<RunBegin>                           1
+<RunEnd>                             1
 
 # a03_1.
-<PostBegin>                          4
-<PostEnd>                            4
+<PostBegin>                          1
+<PostEnd>                            1
 
 # a03_2.
 <NoiseLevel>                         0.3
@@ -139,11 +139,11 @@ ScS
 
 # b01.
 <PlotBegin>                          1
-<PlotEnd>                            2
+<PlotEnd>                            1
 
-<DepthMin>                           2591
+<DepthMin>                           0
 <DepthMax>                           2891
-<AnoDepthInc>                        100
+<AnoDepthInc>                        200
 <GridDepthInc>                       10000
 <TickDepthInc>                       100
 <AnoyInc>                            10

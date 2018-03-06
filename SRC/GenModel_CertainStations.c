@@ -156,8 +156,8 @@ int main(int argc, char **argv){
 
     // Job begin.
     FILE   *fpout,*fpmodel,*fpref,*fptmp,*fprefl;
-    int    AZN,DISTN,count2,count3,position,PREM_Discon,Model_Discon,PREM_Anchor,Model_Anchor,PREM_Rollback,Model_Rollback,position2,position3,isdiscon,isanchor,rollback,flag,flag2,reflindex,Total;
-    double kmperdeg,realaz,*RollbackDepth,*DisconDepth,*AnchorDepth,*height,*vp1,*vp2,*vs1,*vs2,*rho1,*rho2,h;
+    int    AZN,DISTN,count2,position,PREM_Discon,Model_Discon,PREM_Anchor,Model_Anchor,PREM_Rollback,Model_Rollback,position2,position3,isdiscon,isanchor,flag,flag2,reflindex,Total;
+    double kmperdeg,*RollbackDepth,*DisconDepth,*AnchorDepth,*height,*vp1,*vp2,*vs1,*vs2,*rho1,*rho2,h;
     double RHO,VP,VS,QP,QS,tmp1,tmp2,tmp3,tmp4,tmp5,dvp,dvs,drho,change,topdepth,downdepth,h_refl,VP_refl,VS_refl,VS_refl_model,VP_refl_model;
 
 	if (PI[PREM_X]==1) PI[RemoveCrust]=PI[Remove220]=PI[Remove400]=PI[Remove670]=1;
