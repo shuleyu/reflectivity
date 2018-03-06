@@ -40,33 +40,31 @@ cp ${CODEDIR}/LIST.sh ${WORKDIR}/LIST/LIST_`date +%m%d_%H%M`
 chmod -x ${WORKDIR}/LIST/*
 cd ${WORKDIR}
 
-# Deal with parameters.
-grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$ \
-| grep ">"                           \
-| grep -v "BEGIN"                    \
-| grep -v "END"                      \
-| awk 'BEGIN {FS="<"} {print $2}'    \
-| awk 'BEGIN {FS=">"} {print $1,$2}' \
-| awk '{print $1"=\""$2"\""}' > tmpfile_$$
 
+# Deal with parameters (single).
+grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$     \
+| grep ">" | grep -v "BEGIN" | grep -v "END" \
+| awk 'BEGIN {FS="<"} {print $2}'            \
+| awk 'BEGIN {FS=">"} {print $1,$2}' > tmpfile_$$
+awk '{print $1}' tmpfile_$$ > tmpfile1_$$
+awk '{$1="";print "\""$0"\""}' tmpfile_$$ > tmpfile2_$$
+sed 's/\"[[:blank:]]/\"/' tmpfile2_$$ > tmpfile3_$$
+paste -d= tmpfile1_$$ tmpfile3_$$ > tmpfile_$$
 source ${WORKDIR}/tmpfile_$$
 
+# Deal with parameters (range).
 grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$ \
-| grep ">"                           \
-| awk 'BEGIN {FS=":"} {print $2,$1}' \
-| awk 'BEGIN {FS="<"} {print $2}'    \
-| awk 'BEGIN {FS=">"} {print $1,$2}' \
-| awk '{print $1,$2}'                \
-| grep "BEGIN"                       \
+| grep ">" | grep "_BEGIN"               \
+| awk 'BEGIN {FS=":<"} {print $2,$1}'    \
+| awk 'BEGIN {FS="[> ]"} {print $1,$NF}' \
+| sed 's/_BEGIN//g'                      \
 | sort -g -k 2,2 > tmpfile1_$$
 
 grep -n "<" ${WORKDIR}/tmpfile_INFILE_$$ \
-| grep ">"                           \
-| awk 'BEGIN {FS=":"} {print $2,$1}' \
-| awk 'BEGIN {FS="<"} {print $2}'    \
-| awk 'BEGIN {FS=">"} {print $1,$2}' \
-| awk '{print $1,$2}'                \
-| grep "END"                         \
+| grep ">" | grep "_END"                 \
+| awk 'BEGIN {FS=":<"} {print $2,$1}'    \
+| awk 'BEGIN {FS="[> ]"} {print $1,$NF}' \
+| sed 's/_END//g'                        \
 | sort -g -k 2,2 > tmpfile2_$$
 
 paste tmpfile1_$$ tmpfile2_$$ | awk '{print $1,$2,$4}' > tmpfile_parameters_$$
@@ -111,17 +109,17 @@ then
 	# Executables.
 	for code in `ls ${SRCDIR}/*.c | grep -v fun.c`
 	do
-    name=`basename ${code}`
-    name=${name%.c}
+        name=`basename ${code}`
+        name=${name%.c}
 
-    ${CCOMP} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
+        ${CCOMP} ${CFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
 
-    if [ $? -ne 0 ]
-    then
-        echo "${name} C code is not compiled ..."
-        rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
-        exit 1
-    fi
+        if [ $? -ne 0 ]
+        then
+            echo "${name} C code is not compiled ..."
+            rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
+            exit 1
+        fi
 	done
 
 	for code in `ls ${SRCDIR}/*.cpp | grep -v fun.cpp`
@@ -144,7 +142,7 @@ then
 		name=`basename ${code}`
 		name=${name%.f}
 
-		${FCOMP} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
+		${FCOMP} ${FFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
 
 		if [ $? -ne 0 ]
 		then

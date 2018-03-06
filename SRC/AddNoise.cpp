@@ -118,7 +118,7 @@ int main(int argc, char **argv){
 	std::default_random_engine generator;
 	generator.seed(time(NULL));sleep(1);
 	std::uniform_int_distribution<int> distribution1(0,NoiseFileNames.size()-1);
-	for (size_t index1=0;index1<nptsx;index1++){
+	for (int index1=0;index1<nptsx;index1++){
 		WhichNoise[index1]=distribution1(generator);
 	}
 

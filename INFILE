@@ -5,15 +5,16 @@
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
-<SACDIR>                             /opt/sac
-<FCOMP>                              f77
-<FFLAG>                              -W
+<SACDIR>                             /opt/sac-101.6
+<FCOMP>                              gfortran
+<FFLAG>                              -std=legacy
 <CCOMP>                              gcc
+<CFLAG>                              -fPIC
 <CPPCOMP>                            c++
-<CPPFLAG>                            -std=c++14 -Wall
+<CPPFLAG>                            -std=c++14 -fPIC
 
 # a01.
-<BeginIndex>                         3
+<BeginIndex>                         4
 
 <RemoveCrust>                        0
 <Remove220>                          0
@@ -99,12 +100,12 @@ ScS
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           3
-<RunEnd>                             3
+<RunBegin>                           4
+<RunEnd>                             4
 
 # a03_1.
-<PostBegin>                          3
-<PostEnd>                            3
+<PostBegin>                          4
+<PostEnd>                            4
 
 # a03_2.
 <NoiseLevel>                         0.3
