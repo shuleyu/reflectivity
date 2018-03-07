@@ -14,7 +14,7 @@
 <CPPFLAG>                            -std=c++14 -fPIC -Wall
 
 # a01.
-<BeginIndex>                         4
+<BeginIndex>                         9
 
 <RemoveCrust>                        0
 <Remove220>                          0
@@ -59,11 +59,11 @@ ScS
 
 # Calculation Details.
 <ReflDepth>                          500
-<V1>                                 6.0
-<V2>                                 7.5
+<V1>                                 6.1
+<V2>                                 7.1
 <V3>                                 23
 <V4>                                 83
-<RaypN>                              2000
+<RaypN>                              3000
 									 -- RaypN is the second factor of calculation time.
 
 <F1>                                 0.006
@@ -100,12 +100,12 @@ ScS
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           4
-<RunEnd>                             4
+<RunBegin>                           9
+<RunEnd>                             9
 
 # a03_1.
-<PostBegin>                          4
-<PostEnd>                            4
+<PostBegin>                          9
+<PostEnd>                            9
 
 # a03_2.
 <NoiseLevel>                         0.3
