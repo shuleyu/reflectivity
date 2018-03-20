@@ -67,88 +67,10 @@ do
 
 	# Set index file.
 
-# These lines are for event-specialized synthesis.
-# Comment out the use of EQ1 for normal synthesis.
-# case "${count}" in
-# 
-# 	1 )
-# 		EQ1=200608250044
-# 		;;
-# 	2 )
-# 		EQ1=200705251747
-# 		;;
-# 	3 )
-# 		EQ1=200707211327
-# 		;;
-# 	4 )
-# 		EQ1=200707211534
-# 		;;
-# 	5 )
-# 		EQ1=200711180540
-# 		;;
-#     6 )
-# 		EQ1=200807080913
-# 		;;
-# 	7 )
-# 		EQ1=200809031125
-# 		;;
-# 	8 )
-# 		EQ1=200810122055
-# 		;;
-# 	9 )
-# 		EQ1=200907120612
-# 		;;
-# 	10 )
-# 		EQ1=200911141944
-# 		;;
-# 	11 )
-# 		EQ1=201003042239
-# 		;;
-# 	12 )
-# 		EQ1=201101010956
-# 		;;
-# 	13 )
-# 		EQ1=201103061231
-# 		;;
-# 	14 )
-# 		EQ1=201106201636
-# 		;;
-# 	15 )
-# 		EQ1=201111221848
-# 		;;
-# 	16 )
-# 		EQ1=201205141000
-# 		;;
-# 	17 )
-# 		EQ1=201205280507
-# 		;;
-# 	18 )
-# 		EQ1=201308230834
-# 		;;
-# 	* )
-# 		echo "EQ1 Error ..."
-# 		exit 1
-# 		;;
-# esac
-
-
-
-
-
-    if [ ${RunReference} -eq 1 ]
-    then
-        EQname=`echo "201600000000 - ${count}" | bc `
-    else
-        EQname=`echo "201500000000 + ${count}" | bc `
-#         EQname="${EQ1}"
-    fi
+    [ ${RunReference} -eq 1 ] && EQname=`echo "201600000000 - ${count}" | bc ` || EQname=`echo "201500000000 + ${count}" | bc `
 
     NR=`wc -l < ModelInput`
-    rm -f tmpfile_$$
-    for count2 in `seq 1 ${NR}`
-    do
-        echo ${EQname} >> tmpfile_$$
-    done
+    ${BASHCODEDIR}/GenerateColumn.sh ${EQname} ${NR} > tmpfile_$$
     paste tmpfile_$$ ModelInput >> ${WORKDIR}/index
 
     # Clean up.
