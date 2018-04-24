@@ -465,20 +465,20 @@ EOF
     ## Model name and prefix. (don't mess up with the spaces.)
     echo ${ModelName}_${count} > crfl.dat.${ModelName}_${count}
     echo ${ModelName}_${count}_reference > crfl.dat.ref
+
+    if [ ${Comp} = "PSV" ]
+    then
+        Info=" 0 1 1 1 1   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0"
+    else if [ ${Comp} = "SH" ]
+        Info=" 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0"
+    else
+        Info=" 0 0 0 0 0   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0"
+    fi
+
     cat >> crfl.dat.${ModelName}_${count} << EOF
- 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0
+${Info}
     0    0`printf "%5.2d" ${REFLINDEX}`    1    1
 EOF
-    cat >> crfl.dat.ref << EOF
- 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0
-    0    0`printf "%5.2d" ${REFLINDEX}`    1    1
-EOF
-
-# For transverse component only.
-#  2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0
-
-# For Full waveform.
-#  0 0 0 0 0   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0
 
     ## Structure and Suffix.
     cat ModelOutput >> crfl.dat.${ModelName}_${count}
