@@ -6,7 +6,12 @@ c
 c  10/23/90   Modified to automatically enter distance in header
 c                                                     -jah
 
-      real z(800),d(800),a(800),b(800),xx(800),x(800),rho(800),s(131072)
+c      real z(800),d(800),a(800),b(800),xx(800),x(800),rho(800),s(131072)
+c  Feb 28 2018    Modified to accomodate layer increment upto 3km
+c                                                     -Shule
+      real z(4000),d(4000),a(4000),b(4000),xx(4000),x(4000)
+      real rho(4000),s(131072)
+
       integer*4 is(131072)
       character*10 sacfil
       character*25 names
