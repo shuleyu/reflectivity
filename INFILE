@@ -1,20 +1,12 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ScS
-
+<WORKDIR>                            /home/shule/PROJ/t039.PcP_tmp
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
-<CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
 <SACDIR>                             /opt/sac-101.6
-<FCOMP>                              gfortran
-<FFLAG>                              -std=legacy
-<CCOMP>                              gcc
-<CFLAG>                              -fPIC -Wall
-<CPPCOMP>                            c++
-<CPPFLAG>                            -std=c++14 -fPIC -Wall
 
 # a01.
-<Comp>                               SH
+<Comp>                               PSV
                                      -- "PSV", "SH" or "All"
 
 <BeginIndex>                         1
@@ -23,14 +15,14 @@
 <Remove220>                          0
 <Remove400>                          0
 <Remove670>                          0
-<PREM_X>                             1
+<PREM_X>                             0
 									 -- only 1 or 0, no other values.
 									 -- PREM_X will overrule other switches.
 
 # Source. ( CMT in deg.)
 <strike>                             0
-<dip>                                90
-<rake>                               -130
+<dip>                                45
+<rake>                               -90
 
                                      For ScS, use (strike/dip/rake)0/90/-130
                                      For PcP, use (strike/dip/rake)0/45/-90
@@ -44,8 +36,8 @@
 <AZMIN>                              0
 <AZMAX>                              0
 <AZINC>                              5
-<DISTMIN>                            40
-<DISTMAX>                            85
+<DISTMIN>                            20
+<DISTMAX>                            65
 <DISTINC>                            0.1
 
                                      For ScS, use (DISTMIN/DISTMAX) 40/85
@@ -63,8 +55,8 @@ ScS
 # Seismograms.
 <VRED>                               0
 <DELTA>                              0.05
-<Begin>                              400
-<NPTS>                               32768
+<Begin>                              80
+<NPTS>                               16384
                                      -- NPTS Must be 2^N.
                                      -- Signal length will be DELTA*(NPTS-1).
 
@@ -73,11 +65,11 @@ ScS
 
 # Calculation Details.
 <ReflDepth>                          500
-<V1>                                 6.4
-<V2>                                 8
-<V3>                                 23
-<V4>                                 83
-<RaypN>                              1500
+<V1>                                 6.0
+<V2>                                 7.0
+<V3>                                 150
+<V4>                                 180
+<RaypN>                              2500
 									 -- RaypN is the second factor of calculation time.
 
                                      For ScS, use (V1/V2/V3/V4/RaypN) 6.4/8/23/83/1500
@@ -106,7 +98,7 @@ ScS
 # slop refer to gradient direction, value is 1 or -1.
 #
 <ModelName>                          ULVZ
-<LayerInc>                           10
+<LayerInc>                           2
 
                                      For ScS, use (LayerInc) 10
                                      For PcP, use (LayerInc) 2

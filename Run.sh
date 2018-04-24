@@ -91,71 +91,17 @@ done
 #============================================
 #            ! Compile !
 #============================================
-if [ $# -ne 0 ]
-then
+mkdir -p ${EXECDIR}
+trap "rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$; exit 1" SIGINT
 
-	mkdir -p ${EXECDIR}
-	trap "rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$; exit 1" SIGINT
+cd ${CCODEDIR}
+make
+[ $? -ne 0 ] && rm -f ${WORKDIR}/*_$$ && exit 1
 
-	INCLUDEDIR="-I${SACDIR}/include -I${CCODEDIR}"
-	LIBRARYDIR="-L. -L${SACDIR}/lib -L${CCODEDIR}"
-	LIBRARIES="-lASU_tools -lsac -lsacio -lfftw3 -lm"
+cd ${SRCDIR}
+make OUTDIR=${EXECDIR} CDIR=${CCODEDIR} SACDIR=${SACDIR}
 
-	# ASU_tools Functions.
-	cd ${CCODEDIR}
-	make
-	cd ${EXECDIR}
-
-	# Executables.
-	for code in `ls ${SRCDIR}/*.c | grep -v fun.c`
-	do
-        name=`basename ${code}`
-        name=${name%.c}
-
-        ${CCOMP} ${CFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
-
-        if [ $? -ne 0 ]
-        then
-            echo "${name} C code is not compiled ..."
-            rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
-            exit 1
-        fi
-	done
-
-	for code in `ls ${SRCDIR}/*.cpp | grep -v fun.cpp`
-	do
-		name=`basename ${code}`
-		name=${name%.cpp}
-
-		${CPPCOMP} ${CPPFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
-
-		if [ $? -ne 0 ]
-		then
-			echo "${name} C++ code is not compiled ..."
-			rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
-			exit 1
-		fi
-	done
-
-	for code in `ls ${SRCDIR}/*.f`
-	do
-		name=`basename ${code}`
-		name=${name%.f}
-
-		${FCOMP} ${FFLAG} -o ${EXECDIR}/${name}.out ${code} ${INCLUDEDIR} ${LIBRARYDIR} ${LIBRARIES}
-
-		if [ $? -ne 0 ]
-		then
-			echo "${name} F code is not compiled ..."
-			rm -f ${EXECDIR}/*.o ${WORKDIR}/*_$$
-			exit 1
-		fi
-	done
-
-	# Clean up.
-	rm -f ${EXECDIR}/*fun.o
-
-fi
+echo "Compile finished...running..."
 
 # ==============================================
 #           ! Work Begin !
@@ -174,6 +120,8 @@ cat >> ${WORKDIR}/stdout << EOF
 End Date: `date`
 ======================================
 EOF
+
+echo "Finished."
 
 # Clean up.
 rm -f ${WORKDIR}/*_$$
