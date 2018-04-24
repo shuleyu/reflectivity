@@ -28,7 +28,7 @@ c nol:    no. of layers
 c mdeck: top of reflectivity layer
 c iss:  iss=0 (hori and vert), iss=1 (vert), iss=2 (hori)
 c kom:  kom=1 (Vert) kom=2 (Hori)
-c iso:  source layer  
+c iso:  source layer
 c
 
       read(1,101)title
@@ -52,7 +52,7 @@ c
 1     read(1,140) a(nol),b(nol),rho(nol)
 c
 c read in the no. of receivers (nent) and receiver locations (x(i))
-c 
+c
 c
 
       read(1,150) nent
@@ -81,9 +81,9 @@ c
          nx = nx + 1
          sacfil = 's000.h    '
          if(nx.lt.10) write(sacfil(4:4),'(i1)')nx
-         if(nx.ge.10.and.nx.lt.100) 
+         if(nx.ge.10.and.nx.lt.100)
      1	              write(sacfil(3:4),'(i2)')nx
-         if(nx.ge.100.and.nx.lt.1000) 
+         if(nx.ge.100.and.nx.lt.1000)
      1	              write(sacfil(2:4),'(i3)')nx
 	 call newhdr
 	 call setfhv('b',btime,nerr)
@@ -97,9 +97,9 @@ c
          nz = nz + 1
          sacfil = 's000.v    '
          if(nz.lt.10) write(sacfil(4:4),'(i1)')nz
-         if(nz.ge.10.and.nz.lt.100) 
+         if(nz.ge.10.and.nz.lt.100)
      1	              write(sacfil(3:4),'(i2)')nz
-         if(nz.ge.100.and.nz.lt.1000) 
+         if(nz.ge.100.and.nz.lt.1000)
      1	              write(sacfil(2:4),'(i3)')nz
 	 call newhdr
 	 call setfhv('b',btime,nerr)
@@ -116,9 +116,9 @@ c
 	 if(iss.eq.2) sacfil = 's000.h    '
 	 if(iss.eq.3) sacfil = 's000.sh   '
          if(nz.lt.10) write(sacfil(4:4),'(i1)')nz
-         if(nz.ge.10.and.nz.lt.100) 
+         if(nz.ge.10.and.nz.lt.100)
      1	              write(sacfil(3:4),'(i2)')nz
-         if(nz.ge.100.and.nz.lt.1000) 
+         if(nz.ge.100.and.nz.lt.1000)
      1	              write(sacfil(2:4),'(i3)')nz
 	 call newhdr
 	 call setfhv('b',btime,nerr)
