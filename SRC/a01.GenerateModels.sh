@@ -469,7 +469,8 @@ EOF
     if [ ${Comp} = "PSV" ]
     then
         Info=" 0 1 1 1 1   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0"
-    else if [ ${Comp} = "SH" ]
+    elif [ ${Comp} = "SH" ]
+    then
         Info=" 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0"
     else
         Info=" 0 0 0 0 0   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0"

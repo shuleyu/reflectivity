@@ -57,12 +57,12 @@ do
     if [ ${RunReference} -eq 1 ]
     then
         mv crfl.out crfl.out.ref
-        mv crfl.psv crfl.psv.ref
-        mv crfl.sh crfl.sh.ref
+        ! [ ${Comp} = "SH" ] && mv crfl.psv crfl.psv.ref
+        ! [ ${Comp} = "PVS" ] && mv crfl.sh crfl.sh.ref
     else
         mv crfl.out crfl.out.${Model}
-        mv crfl.psv crfl.psv.${Model}
-        mv crfl.sh crfl.sh.${Model}
+        ! [ ${Comp} = "SH" ] && mv crfl.psv crfl.psv.${Model}
+        ! [ ${Comp} = "PVS" ] && mv crfl.sh crfl.sh.${Model}
     fi
 
 	# Set index file.

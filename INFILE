@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.PcP
+<WORKDIR>                            /home/shule/PROJ/t039.ScS
 
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
@@ -14,13 +14,16 @@
 <CPPFLAG>                            -std=c++14 -fPIC -Wall
 
 # a01.
+<Comp>                               SH
+                                     -- "PSV", "SH" or "All"
+
 <BeginIndex>                         1
 
 <RemoveCrust>                        0
 <Remove220>                          0
 <Remove400>                          0
 <Remove670>                          0
-<PREM_X>                             0
+<PREM_X>                             1
 									 -- only 1 or 0, no other values.
 									 -- PREM_X will overrule other switches.
 
@@ -41,8 +44,8 @@
 <AZMIN>                              0
 <AZMAX>                              0
 <AZINC>                              5
-<DISTMIN>                            20
-<DISTMAX>                            65
+<DISTMIN>                            40
+<DISTMAX>                            85
 <DISTINC>                            0.1
 
                                      For ScS, use (DISTMIN/DISTMAX) 40/85
@@ -60,8 +63,8 @@ ScS
 # Seismograms.
 <VRED>                               0
 <DELTA>                              0.05
-<Begin>                              80
-<NPTS>                               16384
+<Begin>                              400
+<NPTS>                               32768
                                      -- NPTS Must be 2^N.
                                      -- Signal length will be DELTA*(NPTS-1).
 
@@ -111,7 +114,7 @@ ScS
 
 
 <Model_BEGIN>
-1 30 1    1 1 0.05   1   1 1 0.05    0.70 0.99 0.01  -1  1.00 1.00 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+30 30 1    1 1 0.05   1   1 1 0.05    0.70 0.70 0.01  -1  1.00 1.00 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
 <Model_END>
 
 
@@ -119,7 +122,7 @@ ScS
 <RunReference>                       0
                                      1  --  Run PREM.
 <RunBegin>                           1
-<RunEnd>                             1 
+<RunEnd>                             1
 
 # a03_1.
 <PostBegin>                          1
