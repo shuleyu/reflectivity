@@ -490,19 +490,19 @@ int main(int argc, char **argv){
 
         if (h>P[ReflDepth] && flag2==0){
             flag2=1;
-            printf("\nLayer @ %.2lf ~ %.2lf km is the first refl. zone layer.\n\n",h_refl,h);
-
-            printf("Velocity (before,after earth-flatening) in the layer right above refl. zone is:\n");
-            printf("PREM  Vp / Vs: %.2lf,%.2lf / %.2lf,%.2lf \n",VP,VP_refl,VS,VS_refl);
-            printf("Model Vp / Vs: %.2lf,%.2lf / %.2lf,%.2lf \n\n",VP*dvp,VP_refl_model,VS*dvs,VS_refl_model);
-
-            printf("Given Phase velocity window is ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",P[V1],P[V2],P[V3],P[V4]);
-
-            printf("According to TakeOff Range: \n");
-            printf("P model takeOff (in deg): %.2lf(V4),%.2lf(V3) ~ %.2lf(V2),%.2lf(V1).\n",
-                    180/M_PI*asin(VP_refl_model/P[V4]),180/M_PI*asin(VP_refl_model/P[V3]),180/M_PI*asin(VP_refl_model/P[V2]),180/M_PI*asin(VP_refl_model/P[V1]));
-            printf("S model takeOff (in deg): %.2lf(V4),%.2lf(V3) ~ %.2lf(V2),%.2lf(V1).\n",
-                    180/M_PI*asin(VS_refl_model/P[V4]),180/M_PI*asin(VS_refl_model/P[V3]),180/M_PI*asin(VS_refl_model/P[V2]),180/M_PI*asin(VS_refl_model/P[V1]));
+//             printf("\nLayer @ %.2lf ~ %.2lf km is the first refl. zone layer.\n\n",h_refl,h);
+// 
+//             printf("Velocity (before,after earth-flatening) in the layer right above refl. zone is:\n");
+//             printf("PREM  Vp / Vs: %.2lf,%.2lf / %.2lf,%.2lf \n",VP,VP_refl,VS,VS_refl);
+//             printf("Model Vp / Vs: %.2lf,%.2lf / %.2lf,%.2lf \n\n",VP*dvp,VP_refl_model,VS*dvs,VS_refl_model);
+// 
+//             printf("Given Phase velocity window is ( V1 / V2 ~ V3 / V4 ): %.2lf / %.2lf ~ %.2lf / %.2lf. \n",P[V1],P[V2],P[V3],P[V4]);
+// 
+//             printf("According to TakeOff Range: \n");
+//             printf("P model takeOff (in deg): %.2lf(V4),%.2lf(V3) ~ %.2lf(V2),%.2lf(V1).\n",
+//                     180/M_PI*asin(VP_refl_model/P[V4]),180/M_PI*asin(VP_refl_model/P[V3]),180/M_PI*asin(VP_refl_model/P[V2]),180/M_PI*asin(VP_refl_model/P[V1]));
+//             printf("S model takeOff (in deg): %.2lf(V4),%.2lf(V3) ~ %.2lf(V2),%.2lf(V1).\n",
+//                     180/M_PI*asin(VS_refl_model/P[V4]),180/M_PI*asin(VS_refl_model/P[V3]),180/M_PI*asin(VS_refl_model/P[V2]),180/M_PI*asin(VS_refl_model/P[V1]));
 
         }
 

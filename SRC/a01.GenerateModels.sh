@@ -16,6 +16,7 @@ trap "rm -rf ${EXECDIR}/*.out ${ModelName}_* *index; exit 1" SIGINT
 # ================================================
 #             ! Work Begin !
 # ================================================
+
 Layer=0
 while read hmin hmax hinc vp1min vp1max vp1inc vpslop vp2min vp2max vp2inc vs1min vs1max vs1inc vsslop vs2min vs2max vs2inc rho1min rho1max rho1inc rhoslop rho2min rho2max rho2inc
 do
@@ -315,20 +316,11 @@ do
 
 done
 
-# Predict the slowness and arrival needed for target phases.
-while read PHASE
-do
-    PHASELIST="${PHASELIST},${PHASE}"
-done < ${WORKDIR}/tmpfile_TargetPhases_${RunNumber}
-
 if ! [ -z "${CertainStaionListFile}" ]
 then
 	DISTMIN=`minmax -C ${CertainStaionListFile} | awk '{print $1}'`
 	DISTMAX=`minmax -C ${CertainStaionListFile} | awk '{print $2}'`
 fi
-
-taup_time -h ${EVDE} -deg ${DISTMIN} -ph ${PHASELIST} --mod prem
-taup_time -h ${EVDE} -deg ${DISTMAX} -ph ${PHASELIST} --mod prem
 
 # ========= Generate crfl.dat on each model. =========
 
@@ -468,7 +460,7 @@ EOF
 
     if [ ${Comp} = "PSV" ]
     then
-        Info=" 0 1 1 1 1   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0"
+        Info=" 0 0 1 0 1   0 1 1 1 1   2 1 0 0 1   0 1 2 1 1   0"
     elif [ ${Comp} = "SH" ]
     then
         Info=" 2 1 0 3 0   0 1 1 1 1   2 1 0 0 1   1 1 2 1 1   0"

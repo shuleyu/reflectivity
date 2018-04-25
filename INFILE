@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.PcP_tmp
+<WORKDIR>                            /home/shule/PROJ/t039.tmp
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <SACDIR>                             /opt/sac-101.6
@@ -43,11 +43,6 @@
                                      For ScS, use (DISTMIN/DISTMAX) 40/85
                                      For PcP, use (DISTMIN/DISTMAX) 20/65
 
-<TargetPhases_BEGIN>
-S
-ScS
-<TargetPhases_END>
-
 <CertainStaionListFile>
 									 -- Keep it empty: use the AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC above.
 									 -- If it's not empty, use this give file, which has two columns: Gcarc & Az.
@@ -77,8 +72,8 @@ ScS
 
 <F1>                                 0.006
 <F2>                                 0.01
-<F3>                                 1.0
-<F4>                                 1.1
+<F3>                                 2.0
+<F4>                                 2.1
                                      -- (f4-f1) is the third factor of calculation time.
 
 <ATTEN>                              0.0

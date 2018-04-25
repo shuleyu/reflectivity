@@ -82,7 +82,7 @@ PLOTDIR=${WORKDIR}/PLOTS
 #============================================
 #            ! Test Dependencies !
 #============================================
-CommandList="sac saclst psxy ps2pdf bc ${CCOMP} ${FCOMP} ${CPPCOMP}"
+CommandList="sac saclst psxy ps2pdf bc"
 for Command in ${CommandList}
 do
     command -v ${Command} >/dev/null 2>&1 || { echo >&2 "Command ${Command} is not found. Exiting ... "; exit 1; }

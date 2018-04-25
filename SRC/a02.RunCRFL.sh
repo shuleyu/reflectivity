@@ -58,11 +58,11 @@ do
     then
         mv crfl.out crfl.out.ref
         ! [ ${Comp} = "SH" ] && mv crfl.psv crfl.psv.ref
-        ! [ ${Comp} = "PVS" ] && mv crfl.sh crfl.sh.ref
+        ! [ ${Comp} = "PSV" ] && mv crfl.sh crfl.sh.ref
     else
         mv crfl.out crfl.out.${Model}
         ! [ ${Comp} = "SH" ] && mv crfl.psv crfl.psv.${Model}
-        ! [ ${Comp} = "PVS" ] && mv crfl.sh crfl.sh.${Model}
+        ! [ ${Comp} = "PSV" ] && mv crfl.sh crfl.sh.${Model}
     fi
 
 	# Set index file.
