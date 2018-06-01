@@ -339,7 +339,7 @@ do
 	if [ -z "${CertainStaionListFile}" ]
 	then # If we use DISTMIN,DISTMAX,AZMIN,AZMAX
 
-		${EXECDIR}/GenModel.out 10 7 28 << EOF
+		${EXECDIR}/GenModel.out 10 8 27 << EOF
 ${RaypN}
 ${NPTS}
 ${M1}
@@ -357,6 +357,7 @@ tmpfile_suffix
 tmpfile1_$$
 tmpfile2_$$
 tmpfile_reflzone
+${WORKDIR}/tmpfile_LayerInc_${RunNumber}
 ${strike}
 ${dip}
 ${rake}
@@ -383,7 +384,6 @@ ${M3}
 ${M4}
 ${OMARKER}
 ${VRED}
-${LayerInc}
 ${ReflDepth}
 EOF
 		if [ $? -ne 0 ]

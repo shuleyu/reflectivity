@@ -118,8 +118,8 @@ int main(int argc, char **argv){
     double *P;
 
     enum PIenum {RaypN,NPTS,M1,M2,LayerN,RemoveCrust,Remove220,Remove400,Remove670,PREM_X};
-    enum PSenum {Model,PREM,Model_Out,Suffix,tmpfile_1,tmpfile_2,tmpfile_reflzone};
-    enum Penum  {strike,dip,rake,EVDE,AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC,REDE,BEGIN,V1,V2,V3,V4,F1,F2,F3,F4,ATTEN,DELTA,M3,M4,OMARKER,VRED,LayerInc,ReflDepth};
+    enum PSenum {Model,PREM,Model_Out,Suffix,tmpfile_1,tmpfile_2,tmpfile_reflzone,LayerIncFile};
+    enum Penum  {strike,dip,rake,EVDE,AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC,REDE,BEGIN,V1,V2,V3,V4,F1,F2,F3,F4,ATTEN,DELTA,M3,M4,OMARKER,VRED,ReflDepth};
 
     int_num=atoi(argv[1]);
     string_num=atoi(argv[2]);
@@ -155,10 +155,18 @@ int main(int argc, char **argv){
     }
 
     // Job begin.
-    FILE   *fpout,*fpmodel,*fpref,*fptmp1,*fptmp2,*fprefl;
-    int    AZN,DISTN,count2,count3,position,PREM_Discon,Model_Discon,PREM_Anchor,Model_Anchor,PREM_Rollback,Model_Rollback,position2,position3,isdiscon,isanchor,flag,flag2,reflindex,Total;
-    double kmperdeg,realaz,*RollbackDepth,*DisconDepth,*AnchorDepth,*height,*vp1,*vp2,*vs1,*vs2,*rho1,*rho2,h;
-    double RHO,VP,VS,QP,QS,tmp1,tmp2,tmp3,tmp4,tmp5,dvp,dvs,drho,change,topdepth,downdepth,h_refl,VP_refl,VS_refl,VS_refl_model,VP_refl_model;
+    FILE   *fpout,*fpmodel,*fpref,*fptmp1,*fptmp2,*fprefl,*fpinc;
+    int    AZN,DISTN,count2,count3,position,PREM_Discon,Model_Discon,PREM_Anchor,Model_Anchor,PREM_Rollback,Model_Rollback,position2,position3,isdiscon,isanchor,flag,flag2,reflindex,Total,IncN;
+    double kmperdeg,realaz,*RollbackDepth,*DisconDepth,*AnchorDepth,*height,*vp1,*vp2,*vs1,*vs2,*rho1,*rho2,h,*IncDepth,*Inc;
+    double RHO,VP,VS,QP,QS,tmp1,tmp2,tmp3,tmp4,tmp5,dvp,dvs,drho,change,topdepth,downdepth,h_refl,VP_refl,VS_refl,VS_refl_model,VP_refl_model,LayerInc;
+
+    IncN=filenr(PS[LayerIncFile]);
+    IncDepth=(double *)malloc(IncN*sizeof(double));
+    Inc=(double *)malloc(IncN*sizeof(double));
+    fpinc=fopen(PS[LayerIncFile],"r");
+    for (count=0;count<IncN;++count)
+        fscanf(fpinc,"%lf%lf",IncDepth+count,Inc+count);
+    fclose(fpinc);
 
 	if (PI[PREM_X]==1) PI[RemoveCrust]=PI[Remove220]=PI[Remove400]=PI[Remove670]=1;
 
@@ -506,7 +514,14 @@ int main(int argc, char **argv){
 
         }
 
-        h+=P[LayerInc];
+        for (count=0;count<IncN;++count){
+            if ( (count==IncN-1) || (IncDepth[count]<=h && h<IncDepth[count+1]) ){
+                LayerInc=Inc[count];
+                break;
+            }
+        }
+
+        h+=LayerInc;
     }
 
     fprintf(fprefl,"%d",reflindex);
