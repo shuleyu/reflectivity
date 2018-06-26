@@ -9,8 +9,8 @@ c                                                     -jah
 c      real z(800),d(800),a(800),b(800),xx(800),x(800),rho(800),s(131072)
 c  Feb 28 2018    Modified to accomodate layer increment upto 3km
 c                                                     -Shule
-      real z(4000),d(4000),a(4000),b(4000),xx(4000),x(4000)
-      real rho(4000),s(131072)
+      real z(5500),d(5500),a(5500),b(5500),xx(5500),x(5500)
+      real rho(5500),s(131072)
 
       integer*4 is(131072)
       character*10 sacfil

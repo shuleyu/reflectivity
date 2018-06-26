@@ -61,7 +61,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}+${rho2inc}" | bc -l`
 
@@ -75,7 +76,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}-${rho2inc}" | bc -l`
 
@@ -110,7 +112,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}+${rho2inc}" | bc -l`
 
@@ -124,7 +127,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}-${rho2inc}" | bc -l`
 
@@ -180,7 +184,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}+${rho2inc}" | bc -l`
 
@@ -194,7 +199,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}-${rho2inc}" | bc -l`
 
@@ -229,7 +235,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}+${rho2inc}" | bc -l`
 
@@ -243,7 +250,8 @@ do
                                         do
 
                                             NModel[${Layer}]=$((NModel[${Layer}]+1))
-                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+                                            echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
+#                                             echo "${H} ${VP1} ${VP2} ${VS1} ${VS2} ${RHO1} ${RHO2}" | awk '{printf "%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf%11.2lf\n",$1,$2,$3,$4,$5,$6,$7}' > ${Layer}.${NModel[${Layer}]}.index
 
                                             RHO2=`echo "${RHO2}-${rho2inc}" | bc -l`
 
@@ -393,7 +401,7 @@ EOF
 		fi
 	else
 
-		${EXECDIR}/GenModel_CertainStations.out 10 6 28 << EOF
+		${EXECDIR}/GenModel_CertainStations.out 10 6 27 << EOF
 ${RaypN}
 ${NPTS}
 ${M1}
@@ -436,7 +444,6 @@ ${M3}
 ${M4}
 ${OMARKER}
 ${VRED}
-${LayerInc}
 ${ReflDepth}
 EOF
 

@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # ==============================================================
-# This script run make SAC files for each models.
+# This script make SAC files for each models.
 #
 # Shule Yu
 # Aug 28 2015
 # ==============================================================
 
-mkdir -p ${WORKDIR}/tmpdir_$$
-cd ${WORKDIR}/tmpdir_$$
-trap "rm -rf ${WORKDIR}/tmpdir_$$; exit 1" SIGINT EXIT
+mkdir -p ${OutPutDirectory}/tmpdir_$$
+cd ${OutPutDirectory}/tmpdir_$$
+trap "rm -rf ${OutPutDirectory}/tmpdir_$$; exit 1" SIGINT EXIT
 
 echo ""
 echo "--> `basename $0` is running."

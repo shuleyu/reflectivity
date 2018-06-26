@@ -28,7 +28,7 @@ c
 c     Altered to these values: SY 09/09/14
 c      maximum number of frequencies:    nfr=131072            see
 c      maximum number of ray-parameters: npa=5000         parameter
-c      maximum number of layers:         nla=4000         statement
+c      maximum number of layers:         nla=7000         statement
 c      maximum number of distancies:     ndis=900        statement
 c      Radius of the earth: 6370 -> 6371.
 c
@@ -41,7 +41,7 @@ c    &unit5=input,unit6=output,unit2=a2,unit3=a3,
 c    &unit21=a21,unit22=a22,unit23=a23)
 c      parameter(nfr=1024,npa=2500,nla=1000,ndis=200)
 c SY_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000,ndis=900)
+      parameter(nfr=131072,npa=5000,nla=7000,ndis=900)
       common/bsh1/xs(100),ys(100),es(100),rr(100),dz(100),vv(100),
      &ts(100),zs(100),az(1000),alpr(nla),betr(nla)
       common/blo1/z(0:nla),d(nla),alp(nla),alpi(nla),bet(nla),
@@ -1596,7 +1596,7 @@ c                    and 1.order for complex arguments
 c
 c      parameter(nfr=1024,npa=2500,nla=1000,ndis=200)
 c SY_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000,ndis=900)
+      parameter(nfr=131072,npa=5000,nla=7000,ndis=900)
       common xa(nfr),xas(nfr),xj0r(nfr),xj0i(nfr),xj1r(nfr),xj1i(nfr),
      &arg2(nfr),ersin(nfr),x5r(nfr),x5i(nfr),z1r(nfr),z1i(nfr),z2r(nfr),
      &z2i(nfr),z11r(nfr),z11i(nfr),z12r(nfr),z12i(nfr),z22r(nfr),
@@ -1687,7 +1687,7 @@ c        = 1   -  transmission durch oberste bzw. unterste schicht
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       complex c1,al(nla),be(nla),aq1,bq1,cosi,cosj
       dimension alpr(nla),betr(nla),alpi(nla),beti(nla),rho(nla),
      &d(nla)
@@ -2091,7 +2091,7 @@ c        = 2   -  transmission durch unterste und oberste schicht
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       complex al(nla),be(nla),cosi,cosj
       dimension d(nla),alpr(nla),alpi(nla),betr(nla),beti(nla),
      &rho(nla)
@@ -2469,7 +2469,7 @@ c        = 1   -  transmission durch oberste bzw. unterste schicht
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       complex c1,al(nla),be(nla),aq1,bq1,cosi,cosj
       dimension alpr(nla),betr(nla),alpi(nla),beti(nla),rho(nla),
      &d(nla)
@@ -3319,7 +3319,7 @@ c       matrix 2.*h
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
         dimension alpr(nla),alpi(nla),betr(nla),beti(nla),
      *  h11r(nfr),h11i(nfr),h12r(nfr),h12i(nfr),h21r(nfr),
      *  h21i(nfr),h22r(nfr),h22i(nfr)
@@ -3404,7 +3404,7 @@ c NS_CHANGE
      *  b11r,b11i,b12r,b12i,b21r,b21i,b22r,b22i,n)
 c        parameter(npa=2500,nfr=1024,nla=1000)
 c NS_CHANGE
-        parameter(npa=5000,nfr=131072,nla=4000)
+        parameter(npa=5000,nfr=131072,nla=7000)
         dimension a11r(n),a11i(n),a12r(n),a12i(n),a21r(n),a21i(n),
      *  a22r(n),a22i(n),
      *  b11r(n),b11i(n),b12r(n),b12i(n),b21r(n),b21i(n),b22r(n),b22i(n),
@@ -3488,7 +3488,7 @@ c NS_CHANGE
       subroutine erdmod(iins,nh)
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       common/blo1/z(0:nla),d(nla),ar(nla),ai(nla),br(nla),bi(nla),
      &rho(nla),qp(nla),qs(nla),qsum,nlay,mdeck,iso,ire,
      &p(npa),p2(npa),p3(npa),pi,pi2,x(1000),vred,tmin,dt,npts,dso,nrho,
@@ -3647,7 +3647,7 @@ c
       subroutine output(dentif,nent,iouts)
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       common/blo1/z(0:nla),d(nla),ar(nla),ai(nla),br(nla),bi(nla),
      &rho(nla),qp(nla),qs(nla),qsum,nlay,mdeck,iso,ire,
      &p(npa),p2(npa),p3(npa),pi,pi2,x(1000),vred,tmin,dt,npts,dso,nrho,
@@ -3687,7 +3687,7 @@ c NS_CHANGE
       subroutine inhom(iins)
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
 
 c
 c     inhom approximates stepwise linear velocity depth function
@@ -4014,7 +4014,7 @@ c
 c *** ber. von x1/(1-x2*x3) ****
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       dimension x1r(n),x1i(n),x2r(n),x2i(n),x3r(n),x3i(n),y1r(n),y1i(n)
       common/integ3/det(npa),z1r(npa),z1i(npa),z2r(npa),z2i(npa),
      &z3r(npa),z3i(npa)
@@ -4031,7 +4031,7 @@ c NS_CHANGE
 c *** ber. von x1/((1-x2*x3)*(1-x4*x5)) ****
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       dimension x1r(n),x1i(n),x2r(n),x2i(n),x3r(n),x3i(n),x4r(n),x4i(n),
      &x5r(n),x5i(n),y1r(n),y1i(n)
       common/integ3/det(npa),z1r(npa),z1i(npa),z2r(npa),z2i(npa),
@@ -4071,7 +4071,7 @@ c        = 1   -  transmission durch oberste bzw. unterste schicht
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       complex bc(nla),mue(nla),bq1
       real muer,muei
       dimension domr(nla),domi(nla),muer(nla),muei(nla),rssr(npa),
@@ -4251,7 +4251,7 @@ c        = 2   -  transmission durch oberste und unterste schicht
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       complex bc(nla),mue(nla),bq1
       real muer,muei
       dimension domr(nla),domi(nla),muer(nla),muei(nla),rssr(npa),
@@ -4415,7 +4415,7 @@ c        = 2   -  transmission durch oberste und unterste schicht
 c
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       complex bc(nla),mue(nla),bq1
       real muer,muei
       dimension domr(nla),domi(nla),muer(nla),muei(nla),tssr(npa),
@@ -4589,7 +4589,7 @@ c NS_CHANGE
       subroutine phas2(a1,a2,e1,e2,e3,e4,f1,f2,f3,f4,p2i,omega,n,ilay)
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       dimension e1(n),e2(n),e3(n),e4(n),f1(n),f2(n),f3(n),f4(n),omega(n)
       common/blo1/z(0:nla),d(nla),alp(nla),alpi(nla),bet(nla),
      &beti(nla),rho(nla),qp(nla),qs(nla),qsum,nlay,mdeck,iso,ire,
@@ -4661,7 +4661,7 @@ c00   continue
       subroutine phas4(a1,a2,e1,e2,e3,e4,f1,f2,f3,f4,p2i,omega,n,ilay)
 c      parameter(nfr=1024,npa=2500,nla=1000)
 c NS_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000)
+      parameter(nfr=131072,npa=5000,nla=7000)
       dimension e1(n),e2(n),e3(n),e4(n),f1(n),f2(n),f3(n),f4(n),omega(n)
       common/blo1/z(0:nla),d(nla),alp(nla),alpi(nla),bet(nla),
      &beti(nla),rho(nla),qp(nla),qs(nla),qsum,nlay,mdeck,iso,ire,
@@ -4696,7 +4696,7 @@ c NS_CHANGE
       subroutine shseis(ioutsh)
 c      parameter(nfr=1024,npa=2500,nla=1000,ndis=200)
 c SY_CHANGE
-      parameter(nfr=131072,npa=5000,nla=4000,ndis=900)
+      parameter(nfr=131072,npa=5000,nla=7000,ndis=900)
       common/bsh1/xs(100),ys(100),es(100),rr(100),dz(100),vv(100),
      &ts(100),zs(100),az(1000),alpr(nla),betr(nla)
       common/blo1/z(0:nla),d(nla),alp(nla),alpi(nla),bet(nla),

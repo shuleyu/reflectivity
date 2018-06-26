@@ -110,20 +110,20 @@ echo "Compile finished...running..."
 cat >> ${WORKDIR}/stdout << EOF
 
 ======================================
-Run Date: `date`
+Run Date (${RunNumber}): `date`
 EOF
 
 ${WORKDIR}/tmpfile_LIST_$$ >> ${WORKDIR}/stdout 2>&1
 
 cat >> ${WORKDIR}/stdout << EOF
 
-End Date: `date`
+End Date (${RunNumber}): `date`
 ======================================
 EOF
 
 echo "Finished."
 
 # Clean up.
-rm -f ${WORKDIR}/*_$$
+rm -f ${WORKDIR}/tmpfile*$$
 
 exit 0

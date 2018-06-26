@@ -375,7 +375,7 @@ int main(int argc, char **argv){
     position2=0;
     position3=0;
 
-    while ( h<6171.0 ){
+    while ( h<IncDepth[IncN-1] ){
 
         if ( h>=RollbackDepth[position3] && position3 < Model_Rollback ) {
             h=RollbackDepth[position3];
