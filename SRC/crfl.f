@@ -14,16 +14,16 @@ c     maximum number of layers:         nla=1000         statement
 c     maximum number of distancies:     ndis=200          statement
 c
 c     Altered to these values: NS 1/2/06
-c      maximum number of frequencies:    nfr=8192            see
-c      maximum number of ray-parameters: npa=5000         parameter
-c      maximum number of layers:         nla=1000         statement
-c      maximum number of distancies:     ndis=200          statement
+c     maximum number of frequencies:    nfr=8192            see
+c     maximum number of ray-parameters: npa=5000         parameter
+c     maximum number of layers:         nla=1000         statement
+c     maximum number of distancies:     ndis=200          statement
 c
 c     Altered to these values: NS 1/31/06
-c      maximum number of frequencies:    nfr=131072            see
-c      maximum number of ray-parameters: npa=5000         parameter
-c      maximum number of layers:         nla=1000         statement
-c      maximum number of distancies:     ndis=200          statement
+c     maximum number of frequencies:    nfr=131072            see
+c     maximum number of ray-parameters: npa=5000         parameter
+c     maximum number of layers:         nla=1000         statement
+c     maximum number of distancies:     ndis=200          statement
 c
 c     Altered to these values: SY 09/09/14
 c      maximum number of frequencies:    nfr=131072            see

@@ -1,6 +1,7 @@
 # Related directories, over-written in Run.sh
 OUTDIR     := .
 CDIR       := .
+CPPDIR     := .
 SACDIR     := /opt/sac
 
 # Compile parameters & dirs, some could be overwritten in Run.sh
@@ -8,7 +9,7 @@ SACDIR     := /opt/sac
 CCOMP      := gcc -Wall -Wimplicit -fPIC
 CPPCOMP    := c++ -std=c++14 -Wall -fPIC
 FCOMP      := gfortran -std=legacy
-INCDIR     := -I. -I$(CDIR) -I$(SACDIR)/include
+INCDIR     := -I. -I$(CDIR) -I$(CPPDIR) -I$(SACDIR)/include
 LIBDIR     := -L. -L$(CDIR) -L$(SACDIR)/lib
 LIBS       := -lASU_tools -lsac -lsacio -lfftw3 -lm
 

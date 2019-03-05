@@ -3,7 +3,7 @@
 # 
 # 1. All noise traces are ended with .sac
 # 
-# 2. Noise are cut before the P arrival of according record.
+# 2. Noise are cut before the P arrival of input records.
 # 
 # 3. Before the cut, a butterworth high pass filter with corner 0.02 is applied.
 # 

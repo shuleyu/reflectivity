@@ -99,7 +99,7 @@ make
 [ $? -ne 0 ] && rm -f ${WORKDIR}/*_$$ && exit 1
 
 cd ${SRCDIR}
-make OUTDIR=${EXECDIR} CDIR=${CCODEDIR} SACDIR=${SACDIR}
+make OUTDIR=${EXECDIR} CDIR=${CCODEDIR} CPPDIR=${CPPCODEDIR} SACDIR=${SACDIR}
 
 echo "Compile finished...running..."
 

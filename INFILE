@@ -1,12 +1,13 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.PcP
+<WORKDIR>                            /home/shule/PROJ/t039.ULVZD5
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
-<SACDIR>                             /opt/sac-101.6
+<CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
+<SACDIR>                             /opt/sac
 
 # a01.
-<Comp>                               PSV
+<Comp>                               SH
                                      -- "PSV", "SH" or "All"
 
 <BeginIndex>                         901
@@ -15,17 +16,17 @@
 <Remove220>                          0
 <Remove400>                          0
 <Remove670>                          0
-<PREM_X>                             0
+<PREM_X>                             1
 									 -- only 1 or 0, no other values.
 									 -- PREM_X will overrule other switches.
 
 # Source. ( CMT in deg.)
 <strike>                             0
-<dip>                                45
-<rake>                               -90
+<dip>                                90
+<rake>                               -130
 
-                                     For ScS, use (strike/dip/rake)0/90/-130
-                                     For PcP, use (strike/dip/rake)0/45/-90
+                                     For ScS,     use (strike/dip/rake)0/90/-130
+                                     For PcP/ScP, use (strike/dip/rake)0/45/-90
 
 
 <EVDE>                               500
@@ -36,48 +37,71 @@
 <AZMIN>                              0
 <AZMAX>                              0
 <AZINC>                              5
-<DISTMIN>                            20
-<DISTMAX>                            65
-<DISTINC>                            0.5
 
-                                     For ScS, use (DISTMIN/DISTMAX) 40/85
-                                     For PcP, use (DISTMIN/DISTMAX) 20/65
+<DISTMIN>                            40
+<DISTMAX>                            85
+<DISTINC>                            0.1
 
-<CertainStaionListFile>
-									 -- Keep it empty: use the AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC above.
-									 -- If it's not empty, use this give file, which has two columns: Gcarc & Az.
+                                     For ScS, use (DISTMIN/DISTMAX) 40/85/0.1
+                                     For PcP, use (DISTMIN/DISTMAX) 20/85/0.5
+                                     For ScP, use (DISTMIN/DISTMAX) 20/70/0.5
+
 
 # Seismograms.
 <VRED>                               0
 <DELTA>                              0.05
-<Begin>                              80
-<NPTS>                               16384
+<Begin>                              400
+<NPTS>                               32768 
                                      -- NPTS Must be 2^N.
                                      -- Signal length will be DELTA*(NPTS-1).
 
                                      For ScS, use (Begin/NPTS) 400/32768
                                      For PcP, use (Begin/NPTS) 80/16384
+                                     For ScP, use (Begin/NPTS) 100/16384
+
+
+<ReflDepth>                          500
 
 # Calculation Details.
-<ReflDepth>                          500
-<V1>                                 7.0
+<V1>                                 6.4
 <V2>                                 8.0
-<V3>                                 150
-<V4>                                 180
-<RaypN>                              2500
+<V3>                                 23
+<V4>                                 83
+<RaypN>                              1500
 									 -- RaypN is the second factor of calculation time.
 
                                      For ScS, use (V1/V2/V3/V4/RaypN) 6.4/8/23/83/1500
-                                     For PcP, use (V1/V2/V3/V4) 6.0/7.0/150/180/2500
+                                     For PcP, use (V1/V2/V3/V4/RaypN) 6.0/7.0/150/180/2500
+                                     For ScP, use (V1/V2/V3/V4/RaypN) 6.0/7.0/150/180/2500 ???
 
-<F1>                                 0.01
-<F2>                                 0.1
-<F3>                                 2.0
-<F4>                                 2.1
+
+<F1>                                 0.006
+<F2>                                 0.01
+<F3>                                 1.0
+<F4>                                 1.1
                                      -- (f4-f1) is the third factor of calculation time.
+
+                                     For ScS, use 0.006/0.01/1.0/1.1
+                                     For PcP, use 0.01 /0.1 /2.0/2.1
+                                     For PcP, use 0.01 /0.1 /0.5/0.6 ???
+
+
+<LayerInc_BEGIN>
+0      10
+6100   10
+<LayerInc_END>
+
+                                     For ScS: 0 ~ 6100 use 10km as inc.
+                                     For PcP/ScP: 0 ~ 5300 use 5km as inc.
+
+<CertainStaionListFile>
+									 -- Keep it empty: use the AZMIN,AZMAX,AZINC,DISTMIN,DISTMAX,DISTINC above.
+									 -- If it's not empty, use this give file, which has two columns: Gcarc & Az.
+
 
 <ATTEN>                              0.0
                                      0.0   --   attenuation not relative to frequency.
+
 
 <M1>                                 0
 <M2>                                 2
@@ -96,25 +120,26 @@
 
 
 <Model_BEGIN>
-2 40 2    1.0 1.0 0.05   -1   1.0 1.0 0.05    0.1 0.85 0.15  -1  1.0 1.0 0.1    1.0 1.2 0.1   1  1.0 1.0 0.1
+1 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05    0.70 1.00 0.01  -1  1.0 1.0 0.1    1.05 1.05 0.01   -1  1.3 1.3 0.1
 <Model_END>
+20  20 5     0.7 1.0 0.05   -1   1 1 0.05    0.70 1.00 0.05  -1  1.00 1.00 0.1    1.00 1.00 0.05   -1  1.0 1.0 0.05
+30  30 5     0.7 1.0 0.1   -1   1 1 0.05    0.70 0.70 0.10  -1  1.00 1.00 0.1    1.00 1.00 0.05   -1  1.0 1.0 0.05
+10 30 5    1.00 1.15 0.05   1   1 1 0.05   1.00 1.20 0.05 1 1.00 1.00 0.1     1.00 1.00 0.05   1  1.0 1.0 0.05
+1 30 1    1 1 0.05   1   1 1 0.05    0.70 0.99 0.01  -1  1.00 1.00 0.1    1.00 1.00 0.05   1  1.0 1.0 0.05
+2 40 2    1.0 1.0 0.05   -1   1.0 1.0 0.05    0.1 0.85 0.15  -1  1.0 1.0 0.1    1.0 1.2 0.1   1  1.0 1.0 0.1
 2 40 2    1.0 1.0 0.05   -1   1.0 1.0 0.05    0.0 0.0 0.15  -1  1.0 1.0 0.1    1.0 1.2 0.1   1  1.0 1.0 0.1
-
-<LayerInc_BEGIN>
-0      5
-5300   10
-<LayerInc_END>
 
 
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           561
-<RunEnd>                             700
+<RunBegin>                           901
+<RunEnd>                             31
+<NThreads>                           6
 
 # a03_1.
-<PostBegin>                          1
-<PostEnd>                            1
+<PostBegin>                          2
+<PostEnd>                            31
 
 # a03_2.
 <NoiseLevel>                         0.3
@@ -134,22 +159,20 @@
 <NoisyPost_END>
 
 # a03_3. Create a similar dataset as the data.
-<OutPutDirectory>                    /home/shule/PROJ/t039.ULVZ_Noisy_CA_D
+<OutPutDirectory>                    /home/shule/PROJ/t039.UHVZ_Noisy_CA_D
 <DB>                                 CA_D
-<SYNDB>                              REFL_ULVZ
+<SYNDB>                              REFL_UHVZ
 <DataNoiseF1>                        0.033
 <DataNoiseF2>                        0.3
 <AddNoise>                           1
 
 <DataNoise_BEGIN>
-121
-421
-871
+280
 <DataNoise_END>
 
 # b01.
-<PlotBegin>                          1
-<PlotEnd>                            1260
+<PlotBegin>                          901
+<PlotEnd>                            1830
 
 <DepthMin>                           2591
 <DepthMax>                           2891
@@ -159,3 +182,26 @@
 <AnoyInc>                            10
 <GridyInc>                           5
 <TickyInc>                           1
+
+# b03.
+<Title>                              ULVZ (20km)
+<CenterPhase>                        PcP
+<COMP>                               THZ
+<Time_MIN>                           -20
+<Time_MAX>                           20
+
+<X_FieldName>                        Vp_Bot
+<X_MIN>                              0.70
+<X_MAX>                              1.00
+<X_INC>                              0.05
+<X_Label>                            Vp (x PREM)
+
+<Y_FieldName>                        Vs_Bot
+<Y_MIN>                              0.70
+<Y_MAX>                              1.00
+<Y_INC>                              0.05
+<Y_Label>                            Vs (x PREM)
+
+<GCARC_MIN>                          20
+<GCARC_MAX>                          85
+<GCARC_INC>                          0.5

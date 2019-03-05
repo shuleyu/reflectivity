@@ -15,9 +15,14 @@ cd ${WORKDIR}
 #             ! Work Begin !
 # ================================================
 
-echo "<EQ> <Thickness> <Vp_Bot> <Vp_Top> <Vs_Bot> <Vs_Top> <Rho_Bot> <Rho_Top>" > ${WORKDIR}/index
+# echo "<EQ> <Thickness> <Vp_Bot> <Vp_Top> <Vs_Bot> <Vs_Top> <Rho_Bot> <Rho_Top>" > ${WORKDIR}/index
 for count in `seq ${RunBegin} ${RunEnd}`
 do
+
+    while [ `jobs -r | grep crfl.out | wc -l` -ge ${NThreads} ]
+    do
+        sleep 30
+    done
 
 	dir=`ls -d ${WORKDIR}/${ModelName}_${count}`
     Model=${ModelName}_${count}
@@ -29,7 +34,7 @@ do
 	fi
 
     cd ${dir}
-    trap "rm -f ${dir}/crfl.dat ${dir}/crfl.sh ${dir}/crfl.psv ${dir}/crfl.out; exit 1" SIGINT
+    trap "rm -f ${dir}/crfl.dat ${dir}/crfl.sh ${dir}/crfl.psv ${dir}/crfl.out ; kill `jobs -p`; exit 1" SIGINT
     echo "    ==> Running reflectivity method on ${Model}..  (`date`)"
 
     if [ ${RunReference} -eq 1 ]
@@ -40,18 +45,22 @@ do
     fi
 
     # Run reflectivity method on ${Model}.
-    ${EXECDIR}/crfl.out
+    ${EXECDIR}/crfl.out &
 
-    if [ $? -ne 0 ]
-    then
-        echo "!=> crfl Abort on ${Model} !"
-        touch ERROR
-        chmod +x ERROR
-        rm -f crfl.dat crfl.out crfl.psv crfl.sh
-		continue
-	else
-		rm -f ERROR crfl.dat
-    fi
+done
+
+while [ `jobs -r | grep crfl.out | wc -l` -ge 1 ]
+do
+    sleep 30
+done
+
+for count in `seq ${RunBegin} ${RunEnd}`
+do
+
+	dir=`ls -d ${WORKDIR}/${ModelName}_${count}`
+    Model=${ModelName}_${count}
+
+    cd ${dir}
 
     # Rename calculation information.
     if [ ${RunReference} -eq 1 ]

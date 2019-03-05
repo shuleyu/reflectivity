@@ -160,7 +160,7 @@ EOF
     then
         for file in `ls *.sac`
         do
-            taup_setsac -mod prem -ph P-0,Pdiff-0,pP-1,S-2,Sdiff-2,sS-3,PP-4,SS-5,PcP-6,ScP-7,SKS-8,ScS-9 ${file}
+            taup_setsac -mod prem -ph P-0,Pdiff-0,pP-1,S-2,Sdiff-2,sS-3,PP-4,SS-5,PcP-6,ScP-7,SP-8,ScS-9 ${file}
         done
     fi
 

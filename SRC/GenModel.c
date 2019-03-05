@@ -434,13 +434,17 @@ int main(int argc, char **argv){
             drho=1;
         }
 
+        double NewVP=VP*dvp,NewVS=VS*dvs;
+        if (NewVP<1e-3) NewVP=1e-3;
+        if (NewVS<1e-3) NewVS=1e-3;
+
         if (isanchor==1 || flag==1 ){
             fprintf(fpref,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,VP,QP,VS,QS,RHO,5);
-            fprintf(fpout,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,VP*dvp,QP,VS*dvs,QS,RHO*drho,5);
+            fprintf(fpout,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,NewVP,QP,NewVS,QS,RHO*drho,5);
         }
         else if (h>0){
             fprintf(fpref,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,VP,QP,VS,QS,RHO,1);
-            fprintf(fpout,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,VP*dvp,QP,VS*dvs,QS,RHO*drho,1);
+            fprintf(fpout,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,NewVP,QP,NewVS,QS,RHO*drho,1);
         }
 
         if(isdiscon==1){
@@ -478,10 +482,14 @@ int main(int argc, char **argv){
                 drho=1;
             }
 
+            NewVP=VP*dvp,NewVS=VS*dvs;
+            if (NewVP<1e-3) NewVP=1e-3;
+            if (NewVS<1e-3) NewVS=1e-3;
+
             h-=0.001;
 
             fprintf(fpref,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,VP,QP,VS,QS,RHO,0);
-            fprintf(fpout,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,VP*dvp,QP,VS*dvs,QS,RHO*drho,0);
+            fprintf(fpout,"%10.4lf%10.4lf%10.2lf%10.4lf%10.3lf%10.4lf%10d\n",h,NewVP,QP,NewVS,QS,RHO*drho,0);
         }
 
         if (h<=P[ReflDepth]){
