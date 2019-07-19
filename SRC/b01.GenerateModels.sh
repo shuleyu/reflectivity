@@ -144,7 +144,8 @@ if [ `ls -rt *_*pdf | wc -l` -eq 1 ]
 then
     cp `ls -rt *_*pdf` All.pdf
 else
-    pdfunite `ls -rt *_*pdf` All.pdf
+#     pdunite `ls -rt *_*pdf` All.pdf
+    pdftk `ls -rt *_*pdf` cat output All.pdf
 fi
 
 cd ${WORKDIR}

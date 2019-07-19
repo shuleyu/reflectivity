@@ -1,6 +1,6 @@
 
 # ================ DIRs and Files ================
-<WORKDIR>                            /home/shule/PROJ/t039.ULVZD5
+<WORKDIR>                            /home/shule/PROJ/t039.GHVZ
 <BASHCODEDIR>                        /home/shule/Research/Fun.Bash.c001
 <CCODEDIR>                           /home/shule/Research/Fun.C.c002
 <CPPCODEDIR>                         /home/shule/Research/Fun.C++.c003
@@ -10,13 +10,13 @@
 <Comp>                               SH
                                      -- "PSV", "SH" or "All"
 
-<BeginIndex>                         901
+<BeginIndex>                         7
 
 <RemoveCrust>                        0
 <Remove220>                          0
 <Remove400>                          0
 <Remove670>                          0
-<PREM_X>                             1
+<PREM_X>                             0
 									 -- only 1 or 0, no other values.
 									 -- PREM_X will overrule other switches.
 
@@ -51,7 +51,7 @@
 <VRED>                               0
 <DELTA>                              0.05
 <Begin>                              400
-<NPTS>                               32768 
+<NPTS>                               32768
                                      -- NPTS Must be 2^N.
                                      -- Signal length will be DELTA*(NPTS-1).
 
@@ -88,7 +88,7 @@
 
 <LayerInc_BEGIN>
 0      10
-6100   10
+5300   10
 <LayerInc_END>
 
                                      For ScS: 0 ~ 6100 use 10km as inc.
@@ -116,11 +116,11 @@
 # Subcripts 1 refer to property at the bottom of each layer, 2 refer to property at the top of each layer.
 # slop refer to gradient direction, value is 1 or -1.
 #
-<ModelName>                          ULVZ
+<ModelName>                          GHVZ
 
 
 <Model_BEGIN>
-1 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05    0.70 1.00 0.01  -1  1.0 1.0 0.1    1.05 1.05 0.01   -1  1.3 1.3 0.1
+30 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05   1.00 1.00 0.1  -1  1.0 1.0 0.1    1.0 1.0 0.10   -1  1.0 1.0 0.1
 <Model_END>
 20  20 5     0.7 1.0 0.05   -1   1 1 0.05    0.70 1.00 0.05  -1  1.00 1.00 0.1    1.00 1.00 0.05   -1  1.0 1.0 0.05
 30  30 5     0.7 1.0 0.1   -1   1 1 0.05    0.70 0.70 0.10  -1  1.00 1.00 0.1    1.00 1.00 0.05   -1  1.0 1.0 0.05
@@ -133,13 +133,13 @@
 # a02.
 <RunReference>                       0
                                      1  --  Run PREM.
-<RunBegin>                           901
-<RunEnd>                             31
-<NThreads>                           6
+<RunBegin>                           1
+<RunEnd>                             7
+<NThreads>                           7
 
 # a03_1.
-<PostBegin>                          2
-<PostEnd>                            31
+<PostBegin>                          1
+<PostEnd>                            7
 
 # a03_2.
 <NoiseLevel>                         0.3
@@ -171,8 +171,8 @@
 <DataNoise_END>
 
 # b01.
-<PlotBegin>                          901
-<PlotEnd>                            1830
+<PlotBegin>                          1
+<PlotEnd>                            7
 
 <DepthMin>                           2591
 <DepthMax>                           2891

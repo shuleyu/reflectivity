@@ -6,7 +6,7 @@
 # ${SRCDIR}/a03_2.PostProcess_AddNoise.sh
 # ${SRCDIR}/a03_3.AddDataNoise.sh
 
-${SRCDIR}/b01.GenerateModels.sh
+# ${SRCDIR}/b01.GenerateModels.sh
 # ${SRCDIR}/b03.PlotModelSpace.sh
 #  ================        Supplementary        ==================
 

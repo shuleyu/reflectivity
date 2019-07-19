@@ -33,7 +33,7 @@ int main(int argc, char **argv){
 //     Data.NormalizeToPeak();
     Data.Integrate();
     Data.NormalizeToSignal();
-    DumpWaveforms(Data,"./");
+    Data.DumpWaveforms("./","StationName","","","txt");
 
     return 0;
 }
