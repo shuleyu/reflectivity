@@ -1,10 +1,3 @@
-<BeginIndex>                         58
-<EVDE>                               582.56
-<Model_BEGIN>
-
-30 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05   1.00 1.00 0.01  -1  1.0 1.0 0.1    1.0 1.0 0.025   -1  1.0 1.0 0.1
-
-<Model_END>
 
 # ================ DIRs and Files ================
 <WORKDIR>                            /home/shule/PROJ/t039.C0
@@ -17,6 +10,7 @@
 <Comp>                               SH
                                      -- "PSV", "SH" or "All"
 
+<BeginIndex>                         1
 
 <RemoveCrust>                        0
 <Remove220>                          0
@@ -36,6 +30,7 @@
                                      For D'',     use (strike/dip/rake)0/90/90
 
 
+<EVDE>                               500
 <OMARKER>                            0
 
 # Receivers.
@@ -94,7 +89,7 @@
 
 
 <LayerInc_BEGIN>
-0      10
+0      1
 5300   10
 <LayerInc_END>
 
@@ -126,6 +121,12 @@
 <ModelName>                          ULVZ
 
 
+<Model_BEGIN>
+
+30 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05   1.00 1.00 0.01  -1  1.0 1.0 0.1    1.0 1.0 0.025   -1  1.0 1.0 0.1
+
+<Model_END>
+
 # ULVZ:
 1 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05   0.70 0.99 0.01  -1  1.2 1.2 0.1    1.0 1.1 0.025   -1  1.3 1.3 0.1
 
@@ -139,12 +140,12 @@
 <RunReference>                       0
                                      1  --  Run PREM.
 <RunBegin>                           1
-<RunEnd>                             58
+<RunEnd>                             1
 <NThreads>                           7
 
 # a03_1.
 <PostBegin>                          1
-<PostEnd>                            58
+<PostEnd>                            1
 
 # a03_2.
 <NoiseLevel>                         0.3

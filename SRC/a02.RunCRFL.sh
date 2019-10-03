@@ -79,7 +79,7 @@ do
     [ ${RunReference} -eq 1 ] && EQname=`echo "201600000000 - ${count}" | bc ` || EQname=`echo "201500000000 + ${count}" | bc `
 
     NR=`wc -l < ModelInput`
-    ${BASHCODEDIR}/GenerateColumn.sh ${EQname} ${NR} > tmpfile_$$
+    ${BASHCODEDIR}/GenerateColumn.sh "${EQname} ${EVDE}" ${NR} > tmpfile_$$
     paste tmpfile_$$ ModelInput >> ${WORKDIR}/index
 
     # Clean up.

@@ -1,10 +1,3 @@
-<BeginIndex>                         58
-<EVDE>                               582.56
-<Model_BEGIN>
-
-30 30 1    1.0 1.0 0.05   -1   1.0 1.0 0.05   1.00 1.00 0.01  -1  1.0 1.0 0.1    1.0 1.0 0.025   -1  1.0 1.0 0.1
-
-<Model_END>
 
 # ================ DIRs and Files ================
 <WORKDIR>                            /home/shule/PROJ/t039.C0
@@ -139,12 +132,12 @@
 <RunReference>                       0
                                      1  --  Run PREM.
 <RunBegin>                           1
-<RunEnd>                             58
+<RunEnd>                             1
 <NThreads>                           7
 
 # a03_1.
 <PostBegin>                          1
-<PostEnd>                            58
+<PostEnd>                            1
 
 # a03_2.
 <NoiseLevel>                         0.3
